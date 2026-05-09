@@ -1,9 +1,10 @@
-import AppLayout from '../components/AppLayout'
+import { getLayoutForRole } from '../utils/layoutForRole'
 import StatCard from '../components/StatCard'
 import { FolderKanban, FileText, Bell } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function Dashboard({ currentUser, onLogout, projects, internships, notifications = [], onMarkRead }) {
+  const Layout = getLayoutForRole(currentUser?.role)
   // Real stats from live data
   const myProjects = (projects || []).filter(
     (p) => String(p.ownerId) === String(currentUser.id)
@@ -76,7 +77,7 @@ export default function Dashboard({ currentUser, onLogout, projects, internships
   const activityFeed = buildActivity()
 
   return (
-    <AppLayout currentUser={currentUser} onLogout={onLogout} notifications={notifications} onMarkRead={onMarkRead}>
+    <Layout currentUser={currentUser} onLogout={onLogout} notifications={notifications} onMarkRead={onMarkRead}>
       <div className="max-w-[1280px] mx-auto w-full space-y-12">
         {/* Page header */}
         <header>
@@ -213,6 +214,6 @@ export default function Dashboard({ currentUser, onLogout, projects, internships
           </section>
         )}
       </div>
-    </AppLayout>
+    </Layout>
   )
 }

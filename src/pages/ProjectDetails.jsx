@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import AppLayout from '../components/AppLayout'
+import { getLayoutForRole } from '../utils/layoutForRole'
 import { GitFork, ExternalLink, ArrowLeft, Plus, Send, Check, X } from 'lucide-react'
 
 const TABS = ['Overview', 'Tasks', 'Comments', 'Collaborators']
 
 export default function ProjectDetails({ currentUser, onLogout, projects, userList, onUpdateProject }) {
+  const Layout = getLayoutForRole(currentUser?.role)
   const { id } = useParams()
   const [tab, setTab] = useState('Overview')
 
@@ -24,14 +25,14 @@ export default function ProjectDetails({ currentUser, onLogout, projects, userLi
 
   if (!project) {
     return (
-      <AppLayout currentUser={currentUser} onLogout={onLogout}>
+      <Layout currentUser={currentUser} onLogout={onLogout}>
         <div className="text-center py-20">
           <p className="text-[#747878] text-sm">Project not found.</p>
           <Link to="/projects" className="mt-4 inline-block text-[#111111] underline text-sm font-semibold">
             ← Back to projects
           </Link>
         </div>
-      </AppLayout>
+      </Layout>
     )
   }
 
@@ -118,7 +119,7 @@ export default function ProjectDetails({ currentUser, onLogout, projects, userLi
   }
 
   return (
-    <AppLayout currentUser={currentUser} onLogout={onLogout}>
+    <Layout currentUser={currentUser} onLogout={onLogout}>
       <div className="max-w-[1280px] mx-auto space-y-6">
         {/* Back */}
         <Link
@@ -482,7 +483,7 @@ export default function ProjectDetails({ currentUser, onLogout, projects, userLi
           </div>
         </div>
       </div>
-    </AppLayout>
+    </Layout>
   )
 
   function formatDate(iso) {

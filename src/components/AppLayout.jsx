@@ -1,15 +1,21 @@
 import { useState } from 'react'
 import { Menu } from 'lucide-react'
-import Sidebar from './Sidebar'
 
-export default function AppLayout({ currentUser, onLogout, children, notifications = [], onMarkRead }) {
+export default function AppLayout({
+  currentUser,
+  onLogout,
+  children,
+  notifications = [],
+  onMarkRead,
+  SidebarComponent,
+}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
     <div className="flex h-screen bg-[#fdf8f8] overflow-hidden">
       {/* Desktop sidebar */}
       <div className="hidden lg:flex flex-shrink-0">
-        <Sidebar
+        <SidebarComponent
           currentUser={currentUser}
           onLogout={onLogout}
           notifications={notifications}
@@ -25,7 +31,7 @@ export default function AppLayout({ currentUser, onLogout, children, notificatio
             onClick={() => setSidebarOpen(false)}
           />
           <div className="relative z-50">
-            <Sidebar
+            <SidebarComponent
               currentUser={currentUser}
               onLogout={onLogout}
               onClose={() => setSidebarOpen(false)}

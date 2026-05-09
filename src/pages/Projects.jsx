@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import AppLayout from '../components/AppLayout'
+import { getLayoutForRole } from '../utils/layoutForRole'
 import { Search, Globe, Lock, Plus, X } from 'lucide-react'
 
 export default function Projects({ currentUser, onLogout, projects, onCreateProject }) {
+  const Layout = getLayoutForRole(currentUser?.role)
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState('Mine')
   const [showModal, setShowModal] = useState(false)
@@ -43,7 +44,7 @@ export default function Projects({ currentUser, onLogout, projects, onCreateProj
   }
 
   return (
-    <AppLayout currentUser={currentUser} onLogout={onLogout}>
+    <Layout currentUser={currentUser} onLogout={onLogout}>
       <div className="max-w-[1280px] mx-auto w-full">
         {/* Page Header */}
         <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -267,6 +268,6 @@ export default function Projects({ currentUser, onLogout, projects, onCreateProj
           </div>
         </div>
       )}
-    </AppLayout>
+    </Layout>
   )
 }

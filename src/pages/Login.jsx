@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, AlertCircle } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { getRoleDashboardPath } from '../utils/roleRoutes'
 
 export default function Login({ onLogin, currentUser }) {
   const navigate = useNavigate()
@@ -12,7 +13,7 @@ export default function Login({ onLogin, currentUser }) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (currentUser) navigate('/dashboard')
+    if (currentUser) navigate(getRoleDashboardPath(currentUser.role))
   }, [currentUser, navigate])
 
   function handleSubmit(e) {
@@ -27,7 +28,7 @@ export default function Login({ onLogin, currentUser }) {
       const result = onLogin(email, password)
       if (result.success) {
         toast.success('Welcome back!')
-        navigate('/dashboard')
+        navigate(getRoleDashboardPath(result.user?.role))
       } else {
         setError(result.error)
         toast.error(result.error)

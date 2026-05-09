@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
-import AppLayout from '../components/AppLayout'
+import { getLayoutForRole } from '../utils/layoutForRole'
 import { UploadCloud, Camera, Edit2, Check, X, Bell, BellOff, Trash2, CheckCircle2 } from 'lucide-react'
 
 /* ── Profile Image Upload ───────────────────────────────── */
@@ -123,6 +123,7 @@ export default function Profile({
   currentUser, onLogout, onUpdateUser, projects, internships = [],
   notifications = [], onMarkRead, onClearNotifications
 }) {
+  const Layout = getLayoutForRole(currentUser?.role)
   const [editMode, setEditMode] = useState(false)
   const [draft, setDraft] = useState({})
   const [activeSection, setActiveSection] = useState('info') // 'info' | 'notifications' | 'internships'
@@ -203,7 +204,7 @@ export default function Profile({
   ]
 
   return (
-    <AppLayout currentUser={currentUser} onLogout={onLogout} notifications={notifications} onMarkRead={onMarkRead}>
+    <Layout currentUser={currentUser} onLogout={onLogout} notifications={notifications} onMarkRead={onMarkRead}>
       <div className="max-w-[1280px] mx-auto w-full">
         {/* Header */}
         <div className="mb-8 flex items-end justify-between gap-4">
@@ -485,6 +486,6 @@ export default function Profile({
           </div>
         </div>
       </div>
-    </AppLayout>
+    </Layout>
   )
 }

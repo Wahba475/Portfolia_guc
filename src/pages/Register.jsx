@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { GraduationCap, Building2, BookOpen, AlertCircle, Eye, EyeOff } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { getRoleDashboardPath } from '../utils/roleRoutes'
 
 const roles = [
   {
@@ -124,6 +125,7 @@ function Step2({ role, onSubmit, onBack }) {
     name: '', email: '', password: '',
     university: '', major: '', gpa: '',
     company: '', position: '',
+    taxCertificate: '',
     department: '',
   })
   const [error, setError] = useState('')
@@ -138,6 +140,7 @@ function Step2({ role, onSubmit, onBack }) {
     if (form.password.length < 6) return 'Password must be at least 6 characters.'
     if (role === 'student' && !form.university) return 'University is required.'
     if (role === 'employer' && !form.company) return 'Company is required.'
+    if (role === 'employer' && !form.taxCertificate) return 'Tax certificate is required.'
     if (role === 'instructor' && !form.department) return 'Department is required.'
     return null
   }
@@ -153,7 +156,7 @@ function Step2({ role, onSubmit, onBack }) {
       if (role === 'student') {
         Object.assign(payload, { university: form.university, major: form.major, gpa: form.gpa })
       } else if (role === 'employer') {
-        Object.assign(payload, { company: form.company, position: form.position })
+        Object.assign(payload, { company: form.company, position: form.position, taxCertificate: form.taxCertificate })
       } else {
         Object.assign(payload, { department: form.department })
       }
@@ -198,6 +201,7 @@ function Step2({ role, onSubmit, onBack }) {
           <>
             <Field id="company" label="Company" value={form.company} onChange={set('company')} placeholder="TechCorp Egypt" />
             <Field id="position" label="Your Position" value={form.position} onChange={set('position')} placeholder="HR Manager" />
+            <Field id="tax-certificate" label="Tax Certificate (PDF URL)" value={form.taxCertificate} onChange={set('taxCertificate')} placeholder="https://example.com/tax-certificate.pdf" />
           </>
         )}
         {role === 'instructor' && (
@@ -233,13 +237,13 @@ export default function Register({ onRegister, currentUser }) {
   const [role, setRole] = useState('')
 
   useEffect(() => {
-    if (currentUser) navigate('/dashboard')
+    if (currentUser) navigate(getRoleDashboardPath(currentUser.role))
   }, [currentUser, navigate])
 
   function handleRegister(payload) {
     onRegister(payload)
     toast.success('Account created! Welcome to Portfolia.')
-    navigate('/dashboard')
+    navigate(getRoleDashboardPath(payload.role))
   }
 
   return (

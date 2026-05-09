@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import AppLayout from '../components/AppLayout'
+import AdminLayout from '../components/AdminLayout'
 import { Filter, Edit2, Plus, Trash2, X, Check, Users, FolderKanban, Briefcase, Shield } from 'lucide-react'
 
 /* ── Stat Card ─────────────────────────────────────────── */
@@ -225,7 +225,7 @@ export default function Admin({
   }
 
   return (
-    <AppLayout currentUser={currentUser} onLogout={onLogout}>
+    <AdminLayout currentUser={currentUser} onLogout={onLogout}>
       <div className="max-w-[1280px] mx-auto w-full space-y-8">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
@@ -502,6 +502,6 @@ export default function Admin({
           onClose={() => setConfirmDelete(null)}
         />
       )}
-    </AppLayout>
+    </AdminLayout>
   )
 }

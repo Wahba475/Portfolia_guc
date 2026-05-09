@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import AppLayout from '../components/AppLayout'
+import { getLayoutForRole } from '../utils/layoutForRole'
 import { MapPin, Clock, Banknote, Search, Users, Plus, X, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react'
 
 const STATUS_STYLES = {
@@ -82,6 +82,7 @@ export default function Internships({
   onApply, onCreateInternship, onSetApplicantStatus,
   notifications = [], onMarkRead
 }) {
+  const Layout = getLayoutForRole(currentUser?.role)
   const [query, setQuery] = useState('')
   const [typeFilter, setTypeFilter] = useState('All')
   const [viewMode, setViewMode] = useState('browse') // 'browse' | 'mine' (employer)
@@ -146,7 +147,7 @@ export default function Internships({
   }
 
   return (
-    <AppLayout currentUser={currentUser} onLogout={onLogout} notifications={notifications} onMarkRead={onMarkRead}>
+    <Layout currentUser={currentUser} onLogout={onLogout} notifications={notifications} onMarkRead={onMarkRead}>
       <div className="max-w-[1280px] mx-auto w-full">
         {/* Page Header */}
         <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -466,6 +467,6 @@ export default function Internships({
           </div>
         </div>
       )}
-    </AppLayout>
+    </Layout>
   )
 }
