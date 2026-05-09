@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
 import AppLayout from '../components/AppLayout'
 import { Search, Globe, Lock, Plus, X } from 'lucide-react'
 
@@ -34,10 +35,11 @@ export default function Projects({ currentUser, onLogout, projects, onCreateProj
     if (!form.title.trim()) return setError('Title is required.')
     setCreating(true)
     const tags = form.tags.split(',').map((t) => t.trim()).filter(Boolean)
-    const proj = onCreateProject({ ...form, tags })
+    onCreateProject({ ...form, tags })
     setCreating(false)
     setShowModal(false)
     setForm({ title: '', description: '', tags: '', visibility: 'Public' })
+    toast.success('Project created successfully!')
   }
 
   return (

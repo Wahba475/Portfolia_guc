@@ -11,6 +11,8 @@ export const users = [
     bio: "Passionate about building scalable web applications and exploring AI.",
     skills: ["React", "Node.js", "Python", "Java"],
     avatar: null,
+    projects: [],
+    applications: [],
   },
   {
     id: "2",
@@ -23,6 +25,8 @@ export const users = [
     bio: "Connecting top talent with exciting opportunities in tech.",
     skills: [],
     avatar: null,
+    projects: [],
+    applications: [],
   },
   {
     id: "3",
@@ -34,5 +38,19 @@ export const users = [
     bio: "Teaching software engineering and algorithms for over 10 years.",
     skills: ["Algorithms", "Software Engineering", "Databases"],
     avatar: null,
+    projects: [],
+    applications: [],
+  },
+  {
+    id: "4",
+    role: "admin",
+    name: "Platform Admin",
+    email: "admin@portfolia.com",
+    password: "admin123",
+    bio: "System administrator for the Portfolia platform.",
+    skills: [],
+    avatar: null,
+    projects: [],
+    applications: [],
   },
 ];

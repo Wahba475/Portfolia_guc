@@ -1,14 +1,93 @@
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import AppLayout from '../components/AppLayout'
-import { MapPin, Clock, Banknote, Search, Users, Plus, X, CheckCircle2 } from 'lucide-react'
+import { MapPin, Clock, Banknote, Search, Users, Plus, X, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react'
 
-export default function Internships({ currentUser, onLogout, internships, onApply, onCreateInternship }) {
+const STATUS_STYLES = {
+  pending:   'bg-[#f1edec] text-[#747878] border-[#e5e2e1]',
+  nominated: 'bg-[#D97706] text-white border-[#D97706]',
+  accepted:  'bg-green-600 text-white border-green-600',
+  rejected:  'bg-[#ba1a1a] text-white border-[#ba1a1a]',
+}
+
+/* ── Req 88: Employer applicant management panel ── */
+function ApplicantManager({ internship, userList, onSetApplicantStatus }) {
+  const [open, setOpen] = useState(false)
+  const statuses = internship.applicantStatuses || {}
+  const applicantIds = internship.applicants || []
+
+  if (applicantIds.length === 0) return (
+    <p className="text-xs text-[#747878] mt-3 pt-3 border-t border-[#e5e2e1]" style={{ fontFamily: "'Inter', sans-serif" }}>
+      No applicants yet.
+    </p>
+  )
+
+  return (
+    <div className="mt-3 pt-3 border-t border-[#e5e2e1]">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#111111] hover:text-[#6b38d4] transition-colors"
+        style={{ fontFamily: "'Inter', sans-serif" }}
+      >
+        <span>Manage Applicants ({applicantIds.length})</span>
+        {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+      </button>
+
+      {open && (
+        <div className="mt-3 space-y-2">
+          {applicantIds.map((uid) => {
+            const user = (userList || []).find((u) => u.id === uid)
+            const currentStatus = statuses[uid] || 'pending'
+            return (
+              <div key={uid} className="flex items-center justify-between gap-3 p-3 bg-[#fdf8f8] border border-[#e5e2e1]">
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-[#111111] truncate" style={{ fontFamily: "'Manrope', sans-serif" }}>
+                    {user?.name || 'Unknown'}
+                  </p>
+                  <p className="text-xs text-[#747878] truncate" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    {user?.email}
+                  </p>
+                </div>
+                <div className="flex gap-1.5 flex-shrink-0">
+                  {['nominated', 'accepted', 'rejected'].map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => {
+                        onSetApplicantStatus(internship.id, uid, s)
+                        toast.success(`${user?.name || 'Applicant'} marked as ${s}.`)
+                      }}
+                      className={`px-2 py-1 text-[9px] font-black uppercase tracking-widest border transition-colors
+                        ${currentStatus === s
+                          ? STATUS_STYLES[s]
+                          : 'bg-white text-[#747878] border-[#e5e2e1] hover:border-[#111111] hover:text-[#111111]'
+                        }`}
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                      title={`Set status: ${s}`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function Internships({
+  currentUser, onLogout, internships, userList = [],
+  onApply, onCreateInternship, onSetApplicantStatus,
+  notifications = [], onMarkRead
+}) {
   const [query, setQuery] = useState('')
   const [typeFilter, setTypeFilter] = useState('All')
-  const [feedback, setFeedback] = useState({}) // { [id]: 'applied' | 'error' }
+  const [viewMode, setViewMode] = useState('browse') // 'browse' | 'mine' (employer)
+  const [feedback, setFeedback] = useState({})
   const [showModal, setShowModal] = useState(false)
 
-  // Create internship form (employer only)
   const [form, setForm] = useState({
     role: '', company: '', description: '', type: 'Hybrid',
     location: '', duration: '', stipend: '', deadline: '', requirements: '',
@@ -18,6 +97,9 @@ export default function Internships({ currentUser, onLogout, internships, onAppl
   const types = ['All', 'On-site', 'Remote', 'Hybrid']
   const isEmployer = currentUser.role === 'employer'
   const isStudent = currentUser.role === 'student'
+
+  // My posted internships (employer view)
+  const myPosted = internships.filter((i) => String(i.employerId) === String(currentUser.id))
 
   const filtered = internships.filter((i) => {
     const matchQuery =
@@ -32,29 +114,39 @@ export default function Internships({ currentUser, onLogout, internships, onAppl
     const result = onApply(internshipId)
     if (result?.success) {
       setFeedback((prev) => ({ ...prev, [internshipId]: 'applied' }))
+      toast.success('Application submitted successfully!')
     } else {
-      setFeedback((prev) => ({ ...prev, [internshipId]: result?.error || 'error' }))
+      const msg = result?.error || 'Could not apply.'
+      setFeedback((prev) => ({ ...prev, [internshipId]: msg }))
+      toast.error(msg)
     }
   }
 
   function hasApplied(internship) {
-    const applicants = internship.applicants || []
-    return applicants.includes(currentUser.id)
+    return (internship.applicants || []).includes(currentUser.id)
+  }
+
+  function getMyStatus(internship) {
+    return (internship.applicantStatuses || {})[currentUser.id] || 'pending'
   }
 
   function handleCreate(e) {
     e.preventDefault()
-    if (!form.role.trim() || !form.company.trim()) return
+    if (!form.role.trim() || !form.company.trim()) {
+      toast.error('Role and company are required.')
+      return
+    }
     setCreating(true)
     const reqs = form.requirements.split(',').map((r) => r.trim()).filter(Boolean)
     onCreateInternship({ ...form, requirements: reqs, tags: [] })
     setCreating(false)
     setShowModal(false)
     setForm({ role: '', company: '', description: '', type: 'Hybrid', location: '', duration: '', stipend: '', deadline: '', requirements: '' })
+    toast.success('Internship posted successfully!')
   }
 
   return (
-    <AppLayout currentUser={currentUser} onLogout={onLogout}>
+    <AppLayout currentUser={currentUser} onLogout={onLogout} notifications={notifications} onMarkRead={onMarkRead}>
       <div className="max-w-[1280px] mx-auto w-full">
         {/* Page Header */}
         <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -62,12 +154,12 @@ export default function Internships({ currentUser, onLogout, internships, onAppl
             <p className="text-xs font-semibold uppercase tracking-wider text-[#747878] mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
               Opportunities
             </p>
-            <h2
+            <h1
               className="text-4xl md:text-5xl font-bold text-[#111111] mb-3"
               style={{ fontFamily: "'Newsreader', serif", letterSpacing: '-0.02em', lineHeight: '1.15' }}
             >
               Internships
-            </h2>
+            </h1>
             <p className="text-lg text-[#747878] leading-relaxed" style={{ fontFamily: "'Manrope', sans-serif" }}>
               {filtered.length} open position{filtered.length !== 1 ? 's' : ''} available.
             </p>
@@ -83,136 +175,199 @@ export default function Internships({ currentUser, onLogout, internships, onAppl
           )}
         </div>
 
-        {/* Controls */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 pb-4 border-b border-[#e5e2e1]">
-          <div className="flex gap-2 flex-wrap">
-            {types.map((t) => (
+        {/* Employer: view toggle */}
+        {isEmployer && (
+          <div className="flex gap-2 mb-6">
+            {[['browse', 'Browse All'], ['mine', `My Postings (${myPosted.length})`]].map(([id, label]) => (
               <button
-                key={t}
-                onClick={() => setTypeFilter(t)}
-                className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors border
-                  ${typeFilter === t
-                    ? 'bg-[#111111] text-white border-[#111111]'
-                    : 'bg-white text-[#111111] border-[#c4c7c7] hover:bg-[#f1edec]'
-                  }`}
+                key={id}
+                onClick={() => setViewMode(id)}
+                className={`px-4 py-2 text-xs font-bold uppercase tracking-wider border transition-colors
+                  ${viewMode === id ? 'bg-[#111111] text-white border-[#111111]' : 'bg-white text-[#747878] border-[#e5e2e1] hover:border-[#111111] hover:text-[#111111]'}`}
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
-                {t}
+                {label}
               </button>
             ))}
           </div>
-          <div className="relative w-full md:w-64">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#747878]" />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by role, company…"
-              className="w-full pl-9 pr-4 py-2 border-b border-[#c4c7c7] bg-transparent focus:border-[#111111] focus:outline-none text-sm text-[#111111] placeholder:text-[#747878] transition-colors"
-              style={{ fontFamily: "'Manrope', sans-serif" }}
-            />
-          </div>
-        </div>
+        )}
 
-        {/* List */}
-        {filtered.length === 0 ? (
-          <div className="text-center py-16 text-[#747878] text-sm" style={{ fontFamily: "'Manrope', sans-serif" }}>
-            No internships match your search.
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filtered.map((i) => {
-              const applied = hasApplied(i) || feedback[i.id] === 'applied'
-              const alreadyMsg = feedback[i.id] === 'Already applied' ? true : false
-              return (
-                <div
-                  key={i.id}
-                  className="bg-white border border-[#e5e2e1] p-6 flex flex-col gap-4 hover:border-[#111111] transition-colors duration-200 group"
+        {/* Controls */}
+        {viewMode === 'browse' && (
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 pb-4 border-b border-[#e5e2e1]">
+            <div className="flex gap-2 flex-wrap">
+              {types.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setTypeFilter(t)}
+                  className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors border
+                    ${typeFilter === t
+                      ? 'bg-[#111111] text-white border-[#111111]'
+                      : 'bg-white text-[#111111] border-[#c4c7c7] hover:bg-[#f1edec]'
+                    }`}
+                  style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  <div className="flex flex-wrap items-start justify-between gap-3 mb-1">
+                  {t}
+                </button>
+              ))}
+            </div>
+            <div className="relative w-full md:w-64">
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#747878]" />
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search by role, company…"
+                className="w-full pl-9 pr-4 py-2 border-b border-[#c4c7c7] bg-transparent focus:border-[#111111] focus:outline-none text-sm text-[#111111] placeholder:text-[#747878] transition-colors"
+                style={{ fontFamily: "'Manrope', sans-serif" }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ── My Postings (employer) ── */}
+        {isEmployer && viewMode === 'mine' && (
+          myPosted.length === 0 ? (
+            <div className="text-center py-16 text-[#747878] text-sm" style={{ fontFamily: "'Manrope', sans-serif" }}>
+              You haven't posted any internships yet.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {myPosted.map((i) => (
+                <div key={i.id} className="bg-white border border-[#e5e2e1] p-6 flex flex-col gap-4">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <h3
-                        className="text-2xl font-bold text-[#111111] group-hover:text-[#6b38d4] transition-colors leading-snug"
-                        style={{ fontFamily: "'Newsreader', serif" }}
-                      >
+                      <h3 className="text-xl font-bold text-[#111111]" style={{ fontFamily: "'Newsreader', serif" }}>
                         {i.role}
                       </h3>
-                      <p className="text-base text-[#111111] mt-1" style={{ fontFamily: "'Manrope', sans-serif" }}>
-                        {i.company}
+                      <p className="text-sm text-[#747878]" style={{ fontFamily: "'Manrope', sans-serif" }}>
+                        {i.company} · {i.location}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span
-                        className="text-[10px] font-semibold uppercase tracking-wider bg-[#f1edec] text-[#111111] px-2 py-1 border border-[#e5e2e1]"
-                        style={{ fontFamily: "'Inter', sans-serif" }}
-                      >
+                    <div className="flex gap-2">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#f1edec] text-[#111111] px-2 py-1 border border-[#e5e2e1]" style={{ fontFamily: "'Inter', sans-serif" }}>
                         {i.type}
                       </span>
-                      <span
-                        className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-1 border ${i.status === 'closed' ? 'bg-[#f1edec] text-[#747878] border-[#e5e2e1]' : 'bg-[#111111] text-white border-[#111111]'}`}
-                        style={{ fontFamily: "'Inter', sans-serif" }}
-                      >
-                        {i.status === 'closed' ? 'Closed' : 'Open'}
+                      <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#111111] text-white px-2 py-1 border border-[#111111]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                        {(i.applicants || []).length} applicants
                       </span>
                     </div>
                   </div>
-
-                  <p className="text-sm text-[#747878] leading-relaxed line-clamp-3 flex-1" style={{ fontFamily: "'Manrope', sans-serif" }}>
-                    {i.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold text-[#111111] uppercase tracking-wider" style={{ fontFamily: "'Inter', sans-serif" }}>
-                    <span className="flex items-center gap-1.5"><MapPin size={12} className="text-[#747878]" /> {i.location}</span>
-                    <span className="flex items-center gap-1.5"><Clock size={12} className="text-[#747878]" /> {i.duration}</span>
-                    {i.stipend && <span className="flex items-center gap-1.5"><Banknote size={12} className="text-[#747878]" /> {i.stipend}</span>}
-                    <span className="flex items-center gap-1.5"><Users size={12} className="text-[#747878]" /> {(i.applicants || []).length} applicants</span>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 pt-3 border-t border-[#e5e2e1]">
-                    {(i.requirements || []).map((r) => (
-                      <span key={r} className="text-[10px] font-semibold uppercase tracking-wider bg-[#ebe7e6] text-[#111111] px-2 py-1" style={{ fontFamily: "'Inter', sans-serif" }}>
-                        {r}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between mt-2">
-                    <span className="text-xs text-[#747878] font-semibold uppercase tracking-wider" style={{ fontFamily: "'Inter', sans-serif" }}>
-                      Deadline: {i.deadline}
-                    </span>
-
-                    {/* Student: apply button */}
-                    {isStudent && (
-                      applied ? (
-                        <span
-                          className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-green-700 border border-green-200 bg-green-50 px-4 py-2"
-                          style={{ fontFamily: "'Inter', sans-serif" }}
-                        >
-                          <CheckCircle2 size={12} /> Applied
-                        </span>
-                      ) : (
-                        <button
-                          onClick={() => handleApply(i.id)}
-                          disabled={i.status === 'closed'}
-                          className="bg-[#111111] text-white px-4 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-[#333] transition-colors border border-[#111111] disabled:opacity-40 disabled:cursor-not-allowed"
-                          style={{ fontFamily: "'Inter', sans-serif" }}
-                        >
-                          Apply Now
-                        </button>
-                      )
-                    )}
-
-                    {/* Employer: view applicant count */}
-                    {isEmployer && String(i.employerId) === String(currentUser.id) && (
-                      <span className="text-xs font-bold text-[#111111] border border-[#e5e2e1] px-3 py-2" style={{ fontFamily: "'Inter', sans-serif" }}>
-                        {(i.applicants || []).length} applicant{(i.applicants || []).length !== 1 ? 's' : ''}
-                      </span>
-                    )}
-                  </div>
+                  {/* Req 88: Applicant status management */}
+                  <ApplicantManager
+                    internship={i}
+                    userList={userList}
+                    onSetApplicantStatus={onSetApplicantStatus}
+                  />
                 </div>
-              )
-            })}
-          </div>
+              ))}
+            </div>
+          )
+        )}
+
+        {/* ── Browse All ── */}
+        {viewMode === 'browse' && (
+          filtered.length === 0 ? (
+            <div className="text-center py-16 text-[#747878] text-sm" style={{ fontFamily: "'Manrope', sans-serif" }}>
+              No internships match your search.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filtered.map((i) => {
+                const applied = hasApplied(i) || feedback[i.id] === 'applied'
+                const myStatus = applied ? getMyStatus(i) : null
+                return (
+                  <div
+                    key={i.id}
+                    className="bg-white border border-[#e5e2e1] p-6 flex flex-col gap-4 hover:border-[#111111] transition-colors duration-200 group"
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-3 mb-1">
+                      <div>
+                        <h3
+                          className="text-2xl font-bold text-[#111111] group-hover:text-[#6b38d4] transition-colors leading-snug"
+                          style={{ fontFamily: "'Newsreader', serif" }}
+                        >
+                          {i.role}
+                        </h3>
+                        <p className="text-base text-[#111111] mt-1" style={{ fontFamily: "'Manrope', sans-serif" }}>
+                          {i.company}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#f1edec] text-[#111111] px-2 py-1 border border-[#e5e2e1]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                          {i.type}
+                        </span>
+                        <span
+                          className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-1 border ${i.status === 'closed' ? 'bg-[#f1edec] text-[#747878] border-[#e5e2e1]' : 'bg-[#111111] text-white border-[#111111]'}`}
+                          style={{ fontFamily: "'Inter', sans-serif" }}
+                        >
+                          {i.status === 'closed' ? 'Closed' : 'Open'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-[#747878] leading-relaxed line-clamp-3 flex-1" style={{ fontFamily: "'Manrope', sans-serif" }}>
+                      {i.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold text-[#111111] uppercase tracking-wider" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      <span className="flex items-center gap-1.5"><MapPin size={12} className="text-[#747878]" /> {i.location}</span>
+                      <span className="flex items-center gap-1.5"><Clock size={12} className="text-[#747878]" /> {i.duration}</span>
+                      {i.stipend && <span className="flex items-center gap-1.5"><Banknote size={12} className="text-[#747878]" /> {i.stipend}</span>}
+                      <span className="flex items-center gap-1.5"><Users size={12} className="text-[#747878]" /> {(i.applicants || []).length} applicants</span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 pt-3 border-t border-[#e5e2e1]">
+                      {(i.requirements || []).map((r) => (
+                        <span key={r} className="text-[10px] font-semibold uppercase tracking-wider bg-[#ebe7e6] text-[#111111] px-2 py-1" style={{ fontFamily: "'Inter', sans-serif" }}>
+                          {r}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between mt-2">
+                      <span className="text-xs text-[#747878] font-semibold uppercase tracking-wider" style={{ fontFamily: "'Inter', sans-serif" }}>
+                        Deadline: {i.deadline}
+                      </span>
+
+                      {/* Student: apply or status badge */}
+                      {isStudent && (
+                        applied ? (
+                          <span
+                            className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-4 py-2 border
+                              ${myStatus === 'accepted' ? 'bg-green-50 text-green-700 border-green-200' :
+                                myStatus === 'rejected' ? 'bg-red-50 text-red-700 border-red-200' :
+                                myStatus === 'nominated' ? 'bg-amber-50 text-amber-700 border-amber-200' :
+                                'bg-[#f1edec] text-[#747878] border-[#e5e2e1]'}`}
+                            style={{ fontFamily: "'Inter', sans-serif" }}
+                          >
+                            <CheckCircle2 size={12} />
+                            {myStatus === 'pending' ? 'Applied' : myStatus}
+                          </span>
+                        ) : (
+                          <button
+                            onClick={() => handleApply(i.id)}
+                            disabled={i.status === 'closed'}
+                            className="bg-[#111111] text-white px-4 py-2 text-xs font-semibold uppercase tracking-wider hover:bg-[#333] transition-colors border border-[#111111] disabled:opacity-40 disabled:cursor-not-allowed"
+                            style={{ fontFamily: "'Inter', sans-serif" }}
+                          >
+                            Apply Now
+                          </button>
+                        )
+                      )}
+
+                      {/* Employer: applicant count */}
+                      {isEmployer && String(i.employerId) === String(currentUser.id) && (
+                        <span className="text-xs font-bold text-[#111111] border border-[#e5e2e1] px-3 py-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                          {(i.applicants || []).length} applicant{(i.applicants || []).length !== 1 ? 's' : ''}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )
         )}
       </div>
 

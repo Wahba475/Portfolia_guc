@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { GraduationCap, Building2, BookOpen, AlertCircle, Eye, EyeOff } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 const roles = [
   {
@@ -237,6 +238,7 @@ export default function Register({ onRegister, currentUser }) {
 
   function handleRegister(payload) {
     onRegister(payload)
+    toast.success('Account created! Welcome to Portfolia.')
     navigate('/dashboard')
   }
 

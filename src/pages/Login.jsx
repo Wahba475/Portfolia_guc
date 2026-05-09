@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, AlertCircle } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 export default function Login({ onLogin, currentUser }) {
   const navigate = useNavigate()
@@ -25,9 +26,11 @@ export default function Login({ onLogin, currentUser }) {
     setTimeout(() => {
       const result = onLogin(email, password)
       if (result.success) {
+        toast.success('Welcome back!')
         navigate('/dashboard')
       } else {
         setError(result.error)
+        toast.error(result.error)
         setLoading(false)
       }
     }, 400)
@@ -90,13 +93,13 @@ export default function Login({ onLogin, currentUser }) {
               >
                 Password
               </label>
-              <button
-                type="button"
+              <Link
+                to="/forgot-password"
                 className="text-sm text-[#444748] hover:text-[#111111] transition-colors"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 Forgot password?
-              </button>
+              </Link>
             </div>
             <div className="relative">
               <input
@@ -146,9 +149,11 @@ export default function Login({ onLogin, currentUser }) {
         </form>
 
         {/* Demo hint */}
-        <p className="text-center text-xs text-[#c4c7c7] absolute bottom-4 left-0 right-0">
-          Demo: ahmed@test.com / password
-        </p>
+        <div className="text-center text-xs text-[#c4c7c7] border-t border-[#f1edec] pt-4 space-y-1">
+          <p>Demo accounts:</p>
+          <p>Student: ahmed@test.com / password</p>
+          <p>Admin: admin@portfolia.com / admin123</p>
+        </div>
       </main>
     </div>
   )
