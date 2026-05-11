@@ -158,12 +158,7 @@ export default function Login({ onLogin, currentUser }) {
           </div>
         </form>
 
-        {/* Demo hint */}
-        <div className="text-center text-xs text-[#c4c7c7] border-t border-[#f1edec] pt-4 space-y-1">
-          <p>Demo accounts:</p>
-          <p>Student: ahmed@test.com / password</p>
-          <p>Admin: admin@portfolia.com / admin123</p>
-        </div>
+
       </main>
     </div>
   )

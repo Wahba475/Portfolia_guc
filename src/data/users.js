@@ -1,10 +1,13 @@
+// Credentials are loaded from environment variables (.env).
+// Never hard-code passwords or emails here.
+
 export const users = [
   {
     id: "1",
     role: "student",
-    name: "Ahmed Hassan",
-    email: "ahmed@test.com",
-    password: "password",
+    name: import.meta.env.VITE_DEMO_STUDENT_NAME || "Ahmed Hassan",
+    email: import.meta.env.VITE_DEMO_STUDENT_EMAIL || "",
+    password: import.meta.env.VITE_DEMO_STUDENT_PASSWORD || "",
     university: "German University in Cairo",
     major: "Computer Science",
     gpa: "3.8",
@@ -17,9 +20,9 @@ export const users = [
   {
     id: "2",
     role: "employer",
-    name: "Sara Nabil",
-    email: "sara@company.com",
-    password: "password",
+    name: import.meta.env.VITE_DEMO_EMPLOYER_NAME || "Sara Nabil",
+    email: import.meta.env.VITE_DEMO_EMPLOYER_EMAIL || "",
+    password: import.meta.env.VITE_DEMO_EMPLOYER_PASSWORD || "",
     company: "TechCorp Egypt",
     position: "HR Manager",
     bio: "Connecting top talent with exciting opportunities in tech.",
@@ -31,9 +34,9 @@ export const users = [
   {
     id: "3",
     role: "instructor",
-    name: "Dr. Khaled Mansour",
-    email: "khaled@guc.edu.eg",
-    password: "password",
+    name: import.meta.env.VITE_DEMO_INSTRUCTOR_NAME || "Dr. Khaled Mansour",
+    email: import.meta.env.VITE_DEMO_INSTRUCTOR_EMAIL || "",
+    password: import.meta.env.VITE_DEMO_INSTRUCTOR_PASSWORD || "",
     department: "Computer Science",
     bio: "Teaching software engineering and algorithms for over 10 years.",
     skills: ["Algorithms", "Software Engineering", "Databases"],
@@ -44,9 +47,9 @@ export const users = [
   {
     id: "4",
     role: "admin",
-    name: "Platform Admin",
-    email: "admin@portfolia.com",
-    password: "admin123",
+    name: import.meta.env.VITE_ADMIN_NAME || "Platform Admin",
+    email: import.meta.env.VITE_ADMIN_EMAIL || "",
+    password: import.meta.env.VITE_ADMIN_PASSWORD || "",
     bio: "System administrator for the Portfolia platform.",
     skills: [],
     avatar: null,
