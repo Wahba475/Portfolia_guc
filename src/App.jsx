@@ -64,7 +64,10 @@ export default function App() {
   const [internshipsList, setInternshipsList] = useState(() => {
     const saved = localStorage.getItem('portfolia_internships')
     if (!saved) return initialInternships
-    try { return JSON.parse(saved) } catch { return initialInternships }
+    try {
+      const parsed = JSON.parse(saved)
+      return parsed.map(i => ({ ...i, applicants: Array.isArray(i.applicants) ? i.applicants : [] }))
+    } catch { return initialInternships }
   })
   const [coursesList, setCoursesList] = useState(() => {
     const saved = localStorage.getItem('portfolia_courses')
