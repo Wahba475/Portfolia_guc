@@ -1,0 +1,177 @@
+- generic [ref=e2]:
+  - generic [ref=e31]:
+    - complementary [ref=e33]:
+      - generic [ref=e34]:
+        - button "Go to home" [ref=e35] [cursor=pointer]:
+          - generic [ref=e37]: P
+          - generic [ref=e38]: Portfolia
+        - button "Notifications" [ref=e40]:
+          - img [ref=e41]
+      - navigation [ref=e44]:
+        - link "Dashboard" [ref=e45] [cursor=pointer]:
+          - /url: /admin/dashboard
+          - img [ref=e46]
+          - generic [ref=e51]: Dashboard
+        - link "Users" [ref=e52] [cursor=pointer]:
+          - /url: /admin/users
+          - img [ref=e53]
+          - generic [ref=e58]: Users
+        - link "Employers Approval" [ref=e59] [cursor=pointer]:
+          - /url: /admin/employers-approval
+          - img [ref=e60]
+          - generic [ref=e64]: Employers Approval
+        - link "Course Requests" [ref=e65] [cursor=pointer]:
+          - /url: /admin/course-requests
+          - img [ref=e66]
+          - generic [ref=e68]: Course Requests
+        - link "Courses" [ref=e69] [cursor=pointer]:
+          - /url: /admin/courses
+          - img [ref=e70]
+          - generic [ref=e72]: Courses
+        - link "Projects Moderation" [ref=e73] [cursor=pointer]:
+          - /url: /admin/projects-moderation
+          - img [ref=e74]
+          - generic [ref=e76]: Projects Moderation
+        - link "Notifications" [ref=e77] [cursor=pointer]:
+          - /url: /admin/notifications
+          - img [ref=e78]
+          - generic [ref=e81]: Notifications
+      - generic [ref=e82]:
+        - generic [ref=e83]:
+          - generic [ref=e85]: P
+          - generic [ref=e86]:
+            - paragraph [ref=e87]: Platform Admin
+            - paragraph [ref=e88]: admin
+        - button "Sign out" [ref=e89]:
+          - img [ref=e90]
+          - text: Sign out
+    - generic [ref=e93]:
+      - link "Back to Home" [ref=e95] [cursor=pointer]:
+        - /url: /
+        - img [ref=e96]
+        - text: Back to Home
+      - main [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - generic [ref=e101]:
+              - heading "System Administration" [level=1] [ref=e102]
+              - paragraph [ref=e103]: Manage global entities, user access, and platform configurations.
+            - generic [ref=e105]:
+              - img [ref=e106]
+              - text: Admin Access
+          - generic [ref=e108]:
+            - generic [ref=e109]:
+              - img [ref=e111]
+              - generic [ref=e116]:
+                - paragraph [ref=e117]: "5"
+                - paragraph [ref=e118]: Total Users
+            - generic [ref=e119]:
+              - img [ref=e121]
+              - generic [ref=e123]:
+                - paragraph [ref=e124]: "4"
+                - paragraph [ref=e125]: Total Projects
+            - generic [ref=e126]:
+              - img [ref=e128]
+              - generic [ref=e131]:
+                - paragraph [ref=e132]: "4"
+                - paragraph [ref=e133]: Internships
+            - generic [ref=e134]:
+              - img [ref=e136]
+              - generic [ref=e138]:
+                - paragraph [ref=e139]: "6"
+                - paragraph [ref=e140]: Courses
+          - generic [ref=e141]:
+            - generic [ref=e142]:
+              - button "Users" [ref=e143]
+              - button "Projects" [ref=e144]
+              - button "Internships" [ref=e145]
+              - button "Courses" [ref=e146]
+              - button "Requests" [ref=e147]
+              - button "Employers" [ref=e148]
+            - generic [ref=e149]:
+              - generic [ref=e150]:
+                - img [ref=e151]
+                - combobox [ref=e153] [cursor=pointer]:
+                  - option "All Roles" [selected]
+                  - option "Admin"
+                  - option "Student"
+                  - option "Employer"
+                  - option "Instructor"
+              - button "Create Account" [ref=e154]:
+                - img [ref=e155]
+                - text: Create Account
+          - generic [ref=e156]:
+            - table [ref=e157]:
+              - rowgroup [ref=e158]:
+                - row "Name & Email Role Projects Actions" [ref=e159]:
+                  - columnheader "Name & Email" [ref=e160]
+                  - columnheader "Role" [ref=e161]
+                  - columnheader "Projects" [ref=e162]
+                  - columnheader "Actions" [ref=e163]
+              - rowgroup [ref=e164]:
+                - row "Ahmed Hassan ahmed@test.com student 3" [ref=e165]:
+                  - cell "Ahmed Hassan ahmed@test.com" [ref=e166]:
+                    - generic [ref=e167]:
+                      - generic [ref=e169]: Ahmed Hassan
+                      - generic [ref=e170]: ahmed@test.com
+                  - cell "student" [ref=e171]:
+                    - generic [ref=e172]: student
+                  - cell "3" [ref=e173]
+                  - cell [ref=e174]:
+                    - generic [ref=e175]:
+                      - button "Deactivate user" [ref=e176]:
+                        - img [ref=e177]
+                      - button "Edit user" [ref=e180]:
+                        - img [ref=e181]
+                      - button "Delete user" [ref=e183]:
+                        - img [ref=e184]
+                - row "Sara Nabil sara@company.com employer 0" [ref=e187]:
+                  - cell "Sara Nabil sara@company.com" [ref=e188]:
+                    - generic [ref=e189]:
+                      - generic [ref=e191]: Sara Nabil
+                      - generic [ref=e192]: sara@company.com
+                  - cell "employer" [ref=e193]:
+                    - generic [ref=e194]: employer
+                  - cell "0" [ref=e195]
+                  - cell [ref=e196]:
+                    - generic [ref=e197]:
+                      - button "Deactivate user" [ref=e198]:
+                        - img [ref=e199]
+                      - button "Edit user" [ref=e202]:
+                        - img [ref=e203]
+                      - button "Delete user" [ref=e205]:
+                        - img [ref=e206]
+                - row "Dr. Khaled Mansour khaled@guc.edu.eg instructor 1" [ref=e209]:
+                  - cell "Dr. Khaled Mansour khaled@guc.edu.eg" [ref=e210]:
+                    - generic [ref=e211]:
+                      - generic [ref=e213]: Dr. Khaled Mansour
+                      - generic [ref=e214]: khaled@guc.edu.eg
+                  - cell "instructor" [ref=e215]:
+                    - generic [ref=e216]: instructor
+                  - cell "1" [ref=e217]
+                  - cell [ref=e218]:
+                    - generic [ref=e219]:
+                      - button "Deactivate user" [ref=e220]:
+                        - img [ref=e221]
+                      - button "Edit user" [ref=e224]:
+                        - img [ref=e225]
+                      - button "Delete user" [ref=e227]:
+                        - img [ref=e228]
+                - row "Test Student teststudent@guc.edu.eg student 0" [ref=e231]:
+                  - cell "Test Student teststudent@guc.edu.eg" [ref=e232]:
+                    - generic [ref=e233]:
+                      - generic [ref=e235]: Test Student
+                      - generic [ref=e236]: teststudent@guc.edu.eg
+                  - cell "student" [ref=e237]:
+                    - generic [ref=e238]: student
+                  - cell "0" [ref=e239]
+                  - cell [ref=e240]:
+                    - generic [ref=e241]:
+                      - button "Deactivate user" [ref=e242]:
+                        - img [ref=e243]
+                      - button "Edit user" [ref=e246]:
+                        - img [ref=e247]
+                      - button "Delete user" [ref=e249]:
+                        - img [ref=e250]
+            - generic [ref=e254]: Showing 4 users
+  - status [ref=e260]: Welcome back!

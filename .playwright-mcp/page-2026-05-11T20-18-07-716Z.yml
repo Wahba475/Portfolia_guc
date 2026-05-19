@@ -1,0 +1,127 @@
+- generic [ref=e93]:
+  - complementary [ref=e95]:
+    - generic [ref=e96]:
+      - button "Go to home" [ref=e97] [cursor=pointer]:
+        - generic [ref=e99]: P
+        - generic [ref=e100]: Portfolia
+      - button "Notifications" [ref=e102]:
+        - img [ref=e103]
+    - navigation [ref=e106]:
+      - link "Dashboard" [ref=e107] [cursor=pointer]:
+        - /url: /student/dashboard
+        - img [ref=e108]
+        - generic [ref=e113]: Dashboard
+      - link "Projects" [ref=e114] [cursor=pointer]:
+        - /url: /student/projects
+        - img [ref=e115]
+        - generic [ref=e117]: Projects
+      - link "Internships" [ref=e118] [cursor=pointer]:
+        - /url: /student/internships
+        - img [ref=e119]
+        - generic [ref=e122]: Internships
+      - link "Portfolios" [ref=e123] [cursor=pointer]:
+        - /url: /student/portfolios
+        - img [ref=e124]
+        - generic [ref=e129]: Portfolios
+      - link "Messages" [ref=e130] [cursor=pointer]:
+        - /url: /student/messages
+        - img [ref=e131]
+        - generic [ref=e133]: Messages
+      - link "Profile" [ref=e134] [cursor=pointer]:
+        - /url: /student/profile
+        - img [ref=e135]
+        - generic [ref=e138]: Profile
+    - generic [ref=e139]:
+      - generic [ref=e140]:
+        - generic [ref=e142]: T
+        - generic [ref=e143]:
+          - paragraph [ref=e144]: Test Student
+          - paragraph [ref=e145]: student
+      - button "Sign out" [ref=e146]:
+        - img [ref=e147]
+        - text: Sign out
+  - generic [ref=e150]:
+    - link "Back to Home" [ref=e152] [cursor=pointer]:
+      - /url: /
+      - img [ref=e153]
+      - text: Back to Home
+    - main [ref=e155]:
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - heading "Welcome back, Test." [level=1] [ref=e158]
+          - paragraph [ref=e159]: Your professional activity at a glance.
+        - generic [ref=e160]:
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - generic [ref=e163]: Total Projects
+              - img [ref=e164]
+            - generic [ref=e166]:
+              - paragraph [ref=e167]: "0"
+              - generic [ref=e168]: Create your first project
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - generic [ref=e171]: Applications Sent
+              - img [ref=e172]
+            - generic [ref=e175]:
+              - paragraph [ref=e176]: "0"
+              - generic [ref=e177]: Browse internships
+          - generic [ref=e178]:
+            - generic [ref=e179]:
+              - generic [ref=e180]: Open Positions
+              - img [ref=e181]
+            - generic [ref=e184]:
+              - paragraph [ref=e185]: "4"
+              - generic [ref=e186]: Available now
+        - generic [ref=e187]:
+          - link "+ New Project" [ref=e188] [cursor=pointer]:
+            - /url: /projects
+          - link "Browse Internships" [ref=e189] [cursor=pointer]:
+            - /url: /internships
+        - generic [ref=e190]:
+          - heading "Activity Feed" [level=2] [ref=e191]
+          - generic [ref=e192]:
+            - 'link "🔔 New opening: Frontend Developer Intern at TechCorp Egypt 2026-04-01" [ref=e193] [cursor=pointer]':
+              - /url: /internships
+              - generic [ref=e194]: 🔔
+              - generic [ref=e195]:
+                - paragraph [ref=e196]: "New opening: Frontend Developer Intern at TechCorp Egypt"
+                - paragraph [ref=e197]: 2026-04-01
+            - 'link "🔔 New opening: Backend Engineer Intern at Instabug 2026-04-10" [ref=e198] [cursor=pointer]':
+              - /url: /internships
+              - generic [ref=e199]: 🔔
+              - generic [ref=e200]:
+                - paragraph [ref=e201]: "New opening: Backend Engineer Intern at Instabug"
+                - paragraph [ref=e202]: 2026-04-10
+        - generic [ref=e203]:
+          - generic [ref=e204]:
+            - heading "Recommended Projects" [level=2] [ref=e205]
+            - link "Browse all →" [ref=e206] [cursor=pointer]:
+              - /url: /projects
+          - generic [ref=e207]:
+            - link "by Ahmed Hassan E-Commerce Platform A full-stack e-commerce application built with React and Node.js, featuring product listings, cart management, and Stripe payments. React Node.js MongoDB" [ref=e208] [cursor=pointer]:
+              - /url: /projects/1
+              - paragraph [ref=e209]: by Ahmed Hassan
+              - heading "E-Commerce Platform" [level=3] [ref=e210]
+              - paragraph [ref=e211]: A full-stack e-commerce application built with React and Node.js, featuring product listings, cart management, and Stripe payments.
+              - generic [ref=e212]:
+                - generic [ref=e213]: React
+                - generic [ref=e214]: Node.js
+                - generic [ref=e215]: MongoDB
+            - link "by Ahmed Hassan AI Study Assistant A RAG-powered chatbot that helps students understand lecture material using semantic search over uploaded PDFs. Python LangChain FastAPI" [ref=e216] [cursor=pointer]:
+              - /url: /projects/2
+              - paragraph [ref=e217]: by Ahmed Hassan
+              - heading "AI Study Assistant" [level=3] [ref=e218]
+              - paragraph [ref=e219]: A RAG-powered chatbot that helps students understand lecture material using semantic search over uploaded PDFs.
+              - generic [ref=e220]:
+                - generic [ref=e221]: Python
+                - generic [ref=e222]: LangChain
+                - generic [ref=e223]: FastAPI
+            - link "by Ahmed Hassan Portfolio Builder A SaaS tool that lets students generate beautiful academic portfolios from structured data, inspired by the Paper design system. React Vite Tailwind CSS" [ref=e224] [cursor=pointer]:
+              - /url: /projects/4
+              - paragraph [ref=e225]: by Ahmed Hassan
+              - heading "Portfolio Builder" [level=3] [ref=e226]
+              - paragraph [ref=e227]: A SaaS tool that lets students generate beautiful academic portfolios from structured data, inspired by the Paper design system.
+              - generic [ref=e228]:
+                - generic [ref=e229]: React
+                - generic [ref=e230]: Vite
+                - generic [ref=e231]: Tailwind CSS

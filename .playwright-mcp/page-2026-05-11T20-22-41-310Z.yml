@@ -1,0 +1,202 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "Notifications" [ref=e12]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - link "Dashboard" [ref=e17] [cursor=pointer]:
+        - /url: /student/dashboard
+        - img [ref=e18]
+        - generic [ref=e23]: Dashboard
+      - link "Projects" [ref=e24] [cursor=pointer]:
+        - /url: /student/projects
+        - img [ref=e25]
+        - generic [ref=e27]: Projects
+      - link "Internships" [ref=e28] [cursor=pointer]:
+        - /url: /student/internships
+        - img [ref=e29]
+        - generic [ref=e32]: Internships
+      - link "Portfolios" [ref=e33] [cursor=pointer]:
+        - /url: /student/portfolios
+        - img [ref=e34]
+        - generic [ref=e39]: Portfolios
+      - link "Messages" [ref=e40] [cursor=pointer]:
+        - /url: /student/messages
+        - img [ref=e41]
+        - generic [ref=e43]: Messages
+      - link "Profile" [ref=e44] [cursor=pointer]:
+        - /url: /student/profile
+        - img [ref=e45]
+        - generic [ref=e48]: Profile
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e52]: A
+        - generic [ref=e53]:
+          - paragraph [ref=e54]: Ahmed Hassan
+          - paragraph [ref=e55]: student
+      - button "Sign out" [ref=e56]:
+        - img [ref=e57]
+        - text: Sign out
+  - generic [ref=e60]:
+    - link "Back to Home" [ref=e62] [cursor=pointer]:
+      - /url: /
+      - img [ref=e63]
+      - text: Back to Home
+    - main [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e68]:
+          - paragraph [ref=e69]: Opportunities
+          - heading "Internships" [level=1] [ref=e70]
+          - paragraph [ref=e71]: 4 positions available.
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]:
+              - button "All" [ref=e75]
+              - button "On-site" [ref=e76]
+              - button "Remote" [ref=e77]
+              - button "Hybrid" [ref=e78]
+            - generic [ref=e79]:
+              - img [ref=e80]
+              - textbox "Search by role, company…" [ref=e83]
+          - generic [ref=e84]:
+            - textbox "Filter by company…" [ref=e85]
+            - textbox "Filter by duration…" [ref=e86]
+            - combobox [ref=e87]:
+              - option "Newest First" [selected]
+              - option "Oldest First"
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - generic [ref=e90]:
+              - generic [ref=e91]:
+                - heading "Data Science Intern" [level=3] [ref=e92]
+                - paragraph [ref=e93]: Breadfast
+              - generic [ref=e94]:
+                - generic [ref=e95]: Remote
+                - generic [ref=e96]: Open
+            - paragraph [ref=e97]: Analyze customer behavior and demand forecasting using Python and ML models. You'll present findings to the product team weekly.
+            - generic [ref=e98]:
+              - generic [ref=e99]:
+                - img [ref=e100]
+                - text: Remote
+              - generic [ref=e103]:
+                - img [ref=e104]
+                - text: 4 months
+              - generic [ref=e107]:
+                - img [ref=e108]
+                - text: EGP 5,000 / month
+              - generic [ref=e111]:
+                - img [ref=e112]
+                - text: 0 applicants
+            - generic [ref=e117]:
+              - generic [ref=e118]: Python
+              - generic [ref=e119]: Pandas
+              - generic [ref=e120]: Scikit-learn
+              - generic [ref=e121]: SQL
+            - generic [ref=e122]:
+              - generic [ref=e123]: "Deadline: 2026-07-01"
+              - button "Apply Now" [active] [ref=e124]
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - generic [ref=e127]:
+                - heading "Backend Engineer Intern" [level=3] [ref=e128]
+                - paragraph [ref=e129]: Instabug
+              - generic [ref=e130]:
+                - generic [ref=e131]: On-site
+                - generic [ref=e132]: Open
+            - paragraph [ref=e133]: Help build and maintain the backend infrastructure powering Instabug's SDK and web dashboard. Work with Ruby on Rails and PostgreSQL.
+            - generic [ref=e134]:
+              - generic [ref=e135]:
+                - img [ref=e136]
+                - text: New Cairo, Egypt
+              - generic [ref=e139]:
+                - img [ref=e140]
+                - text: 6 months
+              - generic [ref=e143]:
+                - img [ref=e144]
+                - text: EGP 6,000 / month
+              - generic [ref=e147]:
+                - img [ref=e148]
+                - text: 0 applicants
+            - generic [ref=e153]:
+              - generic [ref=e154]: Ruby
+              - generic [ref=e155]: Rails
+              - generic [ref=e156]: PostgreSQL
+              - generic [ref=e157]: REST APIs
+            - generic [ref=e158]:
+              - generic [ref=e159]: "Deadline: 2026-06-15"
+              - button "Apply Now" [ref=e160]
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - generic [ref=e163]:
+                - heading "Embedded Systems Intern" [level=3] [ref=e164]
+                - paragraph [ref=e165]: Valeo
+              - generic [ref=e166]:
+                - generic [ref=e167]: On-site
+                - generic [ref=e168]: Open
+            - paragraph [ref=e169]: Work with the ADAS team on real-time embedded software for automotive ECUs. C and AUTOSAR experience preferred.
+            - generic [ref=e170]:
+              - generic [ref=e171]:
+                - img [ref=e172]
+                - text: 6th of October, Egypt
+              - generic [ref=e175]:
+                - img [ref=e176]
+                - text: 3 months
+              - generic [ref=e179]:
+                - img [ref=e180]
+                - text: EGP 3,500 / month
+              - generic [ref=e183]:
+                - img [ref=e184]
+                - text: 0 applicants
+            - generic [ref=e189]:
+              - generic [ref=e190]: C
+              - generic [ref=e191]: AUTOSAR
+              - generic [ref=e192]: Embedded Systems
+              - generic [ref=e193]: RTOS
+            - generic [ref=e194]:
+              - generic [ref=e195]: "Deadline: 2026-05-20"
+              - button "Apply Now" [ref=e196]
+          - generic [ref=e197]:
+            - generic [ref=e198]:
+              - generic [ref=e199]:
+                - heading "Frontend Developer Intern" [level=3] [ref=e200]
+                - paragraph [ref=e201]: TechCorp Egypt
+              - generic [ref=e202]:
+                - generic [ref=e203]: Hybrid
+                - generic [ref=e204]: Open
+            - paragraph [ref=e205]: Join our product team to build React-based dashboards for our B2B SaaS platform. You'll work alongside senior engineers on real features.
+            - generic [ref=e206]:
+              - generic [ref=e207]:
+                - img [ref=e208]
+                - text: Cairo, Egypt
+              - generic [ref=e211]:
+                - img [ref=e212]
+                - text: 3 months
+              - generic [ref=e215]:
+                - img [ref=e216]
+                - text: EGP 4,000 / month
+              - generic [ref=e219]:
+                - img [ref=e220]
+                - text: 0 applicants
+            - generic [ref=e225]:
+              - generic [ref=e226]: React
+              - generic [ref=e227]: JavaScript
+              - generic [ref=e228]: CSS
+              - generic [ref=e229]: Git
+            - generic [ref=e230]:
+              - generic [ref=e231]: "Deadline: 2026-05-31"
+              - button "Apply Now" [ref=e232]
+      - generic [ref=e234]:
+        - generic [ref=e235]:
+          - heading "Apply — Data Science Intern" [level=3] [ref=e236]
+          - button [ref=e237]:
+            - img [ref=e238]
+        - generic [ref=e241]:
+          - generic [ref=e242]:
+            - generic [ref=e243]: Cover Letter (optional)
+            - textbox "Tell us why you're a great fit…" [ref=e244]
+          - generic [ref=e245]:
+            - button "Submit Application" [ref=e246]
+            - button "Cancel" [ref=e247]

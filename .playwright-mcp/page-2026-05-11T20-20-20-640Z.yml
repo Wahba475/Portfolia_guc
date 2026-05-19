@@ -1,0 +1,169 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "Notifications" [ref=e12]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - link "Dashboard" [ref=e17] [cursor=pointer]:
+        - /url: /student/dashboard
+        - img [ref=e18]
+        - generic [ref=e23]: Dashboard
+      - link "Projects" [ref=e24] [cursor=pointer]:
+        - /url: /student/projects
+        - img [ref=e25]
+        - generic [ref=e27]: Projects
+      - link "Internships" [ref=e28] [cursor=pointer]:
+        - /url: /student/internships
+        - img [ref=e29]
+        - generic [ref=e32]: Internships
+      - link "Portfolios" [ref=e33] [cursor=pointer]:
+        - /url: /student/portfolios
+        - img [ref=e34]
+        - generic [ref=e39]: Portfolios
+      - link "Messages" [ref=e40] [cursor=pointer]:
+        - /url: /student/messages
+        - img [ref=e41]
+        - generic [ref=e43]: Messages
+      - link "Profile" [ref=e44] [cursor=pointer]:
+        - /url: /student/profile
+        - img [ref=e45]
+        - generic [ref=e48]: Profile
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e52]: A
+        - generic [ref=e53]:
+          - paragraph [ref=e54]: Ahmed Hassan
+          - paragraph [ref=e55]: student
+      - button "Sign out" [ref=e56]:
+        - img [ref=e57]
+        - text: Sign out
+  - generic [ref=e60]:
+    - link "Back to Home" [ref=e62] [cursor=pointer]:
+      - /url: /
+      - img [ref=e63]
+      - text: Back to Home
+    - main [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - heading "Projects" [level=2] [ref=e69]
+            - paragraph [ref=e70]: Document your technical and academic work.
+          - button "New Project" [active] [ref=e71]:
+            - img [ref=e72]
+            - text: New Project
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - button "Mine" [ref=e75]
+            - button "All Public" [ref=e76]
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - img [ref=e79]
+              - textbox "Search by title…" [ref=e82]
+            - combobox [ref=e83]:
+              - option "All Courses" [selected]
+              - option "Bachelor Project"
+              - option "Database Systems"
+              - option "Software Engineering"
+              - option "Web Development"
+              - option "Algorithms & Data Structures"
+              - option "Operating Systems"
+            - combobox [ref=e84]:
+              - option "Newest First" [selected]
+              - option "Oldest First"
+              - option "By Rating"
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - button "Delete project" [ref=e87]:
+              - img [ref=e88]
+            - link "Yours Public Portfolio Builder A SaaS tool that lets students generate beautiful academic portfolios from structured data, inspired by the Paper design system. React Vite Tailwind CSS" [ref=e91] [cursor=pointer]:
+              - /url: /projects/4
+              - generic [ref=e92]:
+                - generic [ref=e93]: Yours
+                - generic [ref=e94]:
+                  - img [ref=e95]
+                  - text: Public
+              - heading "Portfolio Builder" [level=3] [ref=e98]
+              - paragraph [ref=e99]: A SaaS tool that lets students generate beautiful academic portfolios from structured data, inspired by the Paper design system.
+              - generic [ref=e100]:
+                - generic [ref=e101]: React
+                - generic [ref=e102]: Vite
+                - generic [ref=e103]: Tailwind CSS
+          - generic [ref=e104]:
+            - button "Delete project" [ref=e105]:
+              - img [ref=e106]
+            - link "Yours Public AI Study Assistant A RAG-powered chatbot that helps students understand lecture material using semantic search over uploaded PDFs. Python LangChain FastAPI React" [ref=e109] [cursor=pointer]:
+              - /url: /projects/2
+              - generic [ref=e110]:
+                - generic [ref=e111]: Yours
+                - generic [ref=e112]:
+                  - img [ref=e113]
+                  - text: Public
+              - heading "AI Study Assistant" [level=3] [ref=e116]
+              - paragraph [ref=e117]: A RAG-powered chatbot that helps students understand lecture material using semantic search over uploaded PDFs.
+              - generic [ref=e118]:
+                - generic [ref=e119]: Python
+                - generic [ref=e120]: LangChain
+                - generic [ref=e121]: FastAPI
+                - generic [ref=e122]: React
+          - generic [ref=e123]:
+            - button "Delete project" [ref=e124]:
+              - img [ref=e125]
+            - link "Yours Public E-Commerce Platform A full-stack e-commerce application built with React and Node.js, featuring product listings, cart management, and Stripe payments. React Node.js MongoDB Stripe" [ref=e128] [cursor=pointer]:
+              - /url: /projects/1
+              - generic [ref=e129]:
+                - generic [ref=e130]: Yours
+                - generic [ref=e131]:
+                  - img [ref=e132]
+                  - text: Public
+              - heading "E-Commerce Platform" [level=3] [ref=e135]
+              - paragraph [ref=e136]: A full-stack e-commerce application built with React and Node.js, featuring product listings, cart management, and Stripe payments.
+              - generic [ref=e137]:
+                - generic [ref=e138]: React
+                - generic [ref=e139]: Node.js
+                - generic [ref=e140]: MongoDB
+                - generic [ref=e141]: Stripe
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - heading "New Project" [level=3] [ref=e145]
+          - button [ref=e146]:
+            - img [ref=e147]
+        - generic [ref=e150]:
+          - generic [ref=e151]:
+            - generic [ref=e152]: Title *
+            - textbox "e.g. E-Commerce Platform" [ref=e153]
+          - generic [ref=e154]:
+            - generic [ref=e155]: Course
+            - combobox [ref=e156]:
+              - option "Select a course (optional)" [selected]
+              - option "CSEN901 — Bachelor Project"
+              - option "CSEN604 — Database Systems"
+              - option "CSEN503 — Software Engineering"
+              - option "CSEN401 — Web Development"
+              - option "CSEN301 — Algorithms & Data Structures"
+              - option "CSEN602 — Operating Systems"
+          - generic [ref=e157]:
+            - generic [ref=e158]: Description
+            - textbox "What is this project about?" [ref=e159]
+          - generic [ref=e160]:
+            - generic [ref=e161]: GitHub Link
+            - textbox "https://github.com/..." [ref=e162]
+          - generic [ref=e163]:
+            - generic [ref=e164]: Demo / Video Link
+            - textbox "https://youtube.com/... or live URL" [ref=e165]
+          - generic [ref=e166]:
+            - generic [ref=e167]: Programming Languages (comma separated)
+            - textbox "Python, JavaScript, C++" [ref=e168]
+          - generic [ref=e169]:
+            - generic [ref=e170]: Tags (comma separated)
+            - textbox "React, Node.js, MongoDB" [ref=e171]
+          - generic [ref=e172]:
+            - generic [ref=e173]: Visibility
+            - generic [ref=e174]:
+              - button "Public" [ref=e175]
+              - button "Private" [ref=e176]
+          - generic [ref=e177]:
+            - button "Create Project" [ref=e178]
+            - button "Cancel" [ref=e179]

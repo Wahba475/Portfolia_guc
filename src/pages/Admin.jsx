@@ -285,6 +285,7 @@ export default function Admin({
   onResolveLinkRequest,
   onUpdateProject,
   onCreateAdminUser,
+  onResolveFlag,
 }) {
   const navigate = useNavigate()
   const location = useLocation()
@@ -588,6 +589,50 @@ export default function Admin({
                 Showing {filteredUsers.length} user{filteredUsers.length !== 1 ? 's' : ''}
               </span>
             </div>
+          </div>
+        )}
+
+        {/* ── Flagged Projects (Req 59-63) ── */}
+        {activeTab === 'Projects' && (projects || []).some(p => p.flagged && p.flagStatus === 'pending') && (
+          <div className="bg-white border border-red-200 mb-6">
+            <div className="px-4 py-3 border-b border-red-100 bg-red-50">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-red-700" style={{ fontFamily: "'Inter', sans-serif" }}>
+                Flagged Projects — Pending Review
+              </h3>
+            </div>
+            {(projects || []).filter(p => p.flagged && p.flagStatus === 'pending').map(p => {
+              const owner = (userList || []).find(u => u.id === p.ownerId)
+              return (
+                <div key={p.id} className="px-4 py-4 border-b border-red-50 last:border-0">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-bold text-[#111111]" style={{ fontFamily: "'Manrope', sans-serif" }}>{p.title}</p>
+                      <p className="text-xs text-[#747878] mt-0.5" style={{ fontFamily: "'Inter', sans-serif" }}>by {owner?.name || 'Unknown'}</p>
+                      {p.flagReason && (
+                        <p className="text-xs text-red-700 mt-1 italic" style={{ fontFamily: "'Manrope', sans-serif" }}>Reason: {p.flagReason}</p>
+                      )}
+                      {p.appeal && (
+                        <p className="text-xs text-blue-700 mt-1" style={{ fontFamily: "'Manrope', sans-serif" }}>Appeal: {p.appeal}</p>
+                      )}
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      <button
+                        onClick={() => { onResolveFlag && onResolveFlag(p.id, 'hide'); toast.success('Project hidden.') }}
+                        className="px-3 py-1.5 bg-red-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-red-700"
+                        style={{ fontFamily: "'Inter', sans-serif" }}>
+                        Hide
+                      </button>
+                      <button
+                        onClick={() => { onResolveFlag && onResolveFlag(p.id, 'dismiss'); toast.success('Flag dismissed.') }}
+                        className="px-3 py-1.5 border border-[#e5e2e1] text-xs font-bold uppercase tracking-wider text-[#111111] hover:bg-[#f1edec]"
+                        style={{ fontFamily: "'Inter', sans-serif" }}>
+                        Dismiss
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         )}
 

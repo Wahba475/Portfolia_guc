@@ -46,7 +46,7 @@ export default function Messages({
   useEffect(() => {
     if (selectedUserId && onMarkConversationRead) onMarkConversationRead(selectedUserId)
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [selectedUserId, conversation.length, onMarkConversationRead])
+  }, [selectedUserId, conversation.length]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleSend(e) {
     e.preventDefault()

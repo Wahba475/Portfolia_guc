@@ -1,0 +1,22 @@
+- generic [ref=e2]:
+  - main [ref=e4]:
+    - generic [ref=e5]:
+      - button "Back" [ref=e23]:
+        - img [ref=e7]
+        - text: Back
+      - paragraph [ref=e13]: Step 2 of 3 — Enter OTP
+      - heading "Enter OTP" [level=1] [ref=e24]
+      - paragraph [ref=e15]: Enter the 6-digit OTP sent to ahmed@test.com.
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - img [ref=e27]
+        - paragraph [ref=e30]:
+          - text: OTP sent to
+          - strong [ref=e31]: ahmed@test.com
+          - text: . For this demo, the code was shown in the notification.
+      - generic [ref=e32]:
+        - generic [ref=e33]: One-Time Password (OTP)
+        - textbox "6-digit code" [ref=e34]
+      - button "Verify OTP" [ref=e35]
+      - button "Resend OTP" [ref=e36]
+  - status [ref=e42]: "OTP sent! (Demo code: 147839)"

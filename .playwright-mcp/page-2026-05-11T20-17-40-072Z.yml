@@ -1,0 +1,114 @@
+- generic [ref=e2]:
+  - generic [ref=e189]:
+    - generic [ref=e190]:
+      - banner [ref=e195]:
+        - generic [ref=e196] [cursor=pointer]:
+          - generic [ref=e198]: P
+          - generic [ref=e199]: Portfolia
+        - navigation [ref=e200]:
+          - link "Features" [ref=e201] [cursor=pointer]:
+            - /url: "#features"
+          - link "About" [ref=e202] [cursor=pointer]:
+            - /url: "#about"
+        - generic [ref=e203]:
+          - link [ref=e204] [cursor=pointer]:
+            - /url: /register
+            - img [ref=e205]
+          - link "Sign in" [ref=e207] [cursor=pointer]:
+            - /url: /login
+      - main [ref=e208]:
+        - generic [ref=e211]: ✦ Student Career Portfolio Platform
+        - heading "Build your Legacy. Start here." [level=1] [ref=e212]:
+          - generic [ref=e213]: Build your
+          - generic [ref=e214]: Legacy.
+          - generic [ref=e215]: Start here.
+        - paragraph [ref=e216]: A unified platform connecting students, instructors, and employers through documented work, verified skills, and real internship opportunities.
+        - generic [ref=e217]:
+          - link "Get Started" [ref=e218] [cursor=pointer]:
+            - /url: /register
+            - generic [ref=e219]: Get Started
+          - link "Learn More" [ref=e220] [cursor=pointer]:
+            - /url: /login
+            - generic [ref=e221]: Learn More
+      - generic [ref=e223]: Scroll
+    - generic [ref=e225]:
+      - generic [ref=e227]:
+        - img
+        - generic [ref=e228]:
+          - paragraph [ref=e229]: Interactive 3D
+          - heading "Your work, alive." [level=2] [ref=e230]
+          - paragraph [ref=e231]: Portfolia turns static project records into an immersive experience. Showcase your technical depth with interactive 3D visuals that captivate employers at first glance.
+          - link "Start building" [ref=e233] [cursor=pointer]:
+            - /url: /register
+            - text: Start building
+            - img [ref=e234]
+      - generic [ref=e240]:
+        - generic [ref=e241] [cursor=pointer]:
+          - generic [ref=e242]: "01"
+          - img [ref=e244]
+          - generic [ref=e246]:
+            - heading "Projects" [level=3] [ref=e247]
+            - paragraph [ref=e248]: Every project is a documented milestone. Structural clarity with tags, collaborators, and milestones.
+          - link "Explore" [ref=e250]:
+            - /url: /projects
+            - text: Explore
+            - img [ref=e251]
+        - generic [ref=e253] [cursor=pointer]:
+          - generic [ref=e254]: "02"
+          - img [ref=e256]
+          - generic [ref=e258]:
+            - heading "Portfolios" [level=3] [ref=e259]
+            - paragraph [ref=e260]: An editorial canvas that presents your capabilities. Substance over flash — always.
+          - link "Explore" [ref=e262]:
+            - /url: /profile
+            - text: Explore
+            - img [ref=e263]
+        - generic [ref=e265] [cursor=pointer]:
+          - generic [ref=e266]: "03"
+          - img [ref=e268]
+          - generic [ref=e271]:
+            - heading "Internships" [level=3] [ref=e272]
+            - paragraph [ref=e273]: Bridge academia and industry. Verified skills, real opportunities, zero noise.
+          - link "Explore" [ref=e275]:
+            - /url: /internships
+            - text: Explore
+            - img [ref=e276]
+    - generic [ref=e279]:
+      - generic [ref=e280]:
+        - paragraph [ref=e281]: About
+        - heading "Building the foundation for academic and professional legacy." [level=2] [ref=e282]
+        - paragraph [ref=e283]: Portfolia was built for the German University in Cairo ecosystem — connecting students with instructors who guide them, and employers who hire them. Clean design, zero clutter.
+      - generic [ref=e284]:
+        - generic [ref=e285]:
+          - generic [ref=e286]: 3 roles
+          - generic [ref=e287]: Student · Instructor · Employer
+        - generic [ref=e288]:
+          - generic [ref=e289]: ∞ Projects
+          - generic [ref=e290]: Unlimited project documentation
+        - generic [ref=e291]:
+          - generic [ref=e292]: 100% free
+          - generic [ref=e293]: For every GUC student
+        - generic [ref=e294]:
+          - generic [ref=e295]: 1 platform
+          - generic [ref=e296]: One place for your entire career
+    - generic [ref=e298]:
+      - heading "Ready to build your legacy?" [level=2] [ref=e299]
+      - paragraph [ref=e300]: Join students already documenting their journey on Portfolia.
+      - generic [ref=e301]:
+        - link "Create Account" [ref=e302] [cursor=pointer]:
+          - /url: /register
+        - link "Sign In" [ref=e303] [cursor=pointer]:
+          - /url: /login
+    - contentinfo [ref=e304]:
+      - generic [ref=e305]:
+        - generic [ref=e306]:
+          - generic [ref=e308]: P
+          - generic [ref=e309]: © 2026 Portfolia — GUC Career Platform
+        - generic [ref=e310]:
+          - link [ref=e311] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e312]
+          - link [ref=e317] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e318]
+  - status [ref=e326]: You have been signed out.

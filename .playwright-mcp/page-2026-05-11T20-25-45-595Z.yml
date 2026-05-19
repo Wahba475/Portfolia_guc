@@ -1,0 +1,147 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "Notifications" [ref=e12]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - link "Dashboard" [ref=e17] [cursor=pointer]:
+        - /url: /admin/dashboard
+        - img [ref=e18]
+        - generic [ref=e23]: Dashboard
+      - link "Users" [ref=e24] [cursor=pointer]:
+        - /url: /admin/users
+        - img [ref=e25]
+        - generic [ref=e30]: Users
+      - link "Employers Approval" [ref=e31] [cursor=pointer]:
+        - /url: /admin/employers-approval
+        - img [ref=e32]
+        - generic [ref=e36]: Employers Approval
+      - link "Course Requests" [ref=e37] [cursor=pointer]:
+        - /url: /admin/course-requests
+        - img [ref=e38]
+        - generic [ref=e40]: Course Requests
+      - link "Courses" [ref=e41] [cursor=pointer]:
+        - /url: /admin/courses
+        - img [ref=e42]
+        - generic [ref=e44]: Courses
+      - link "Projects Moderation" [ref=e45] [cursor=pointer]:
+        - /url: /admin/projects-moderation
+        - img [ref=e46]
+        - generic [ref=e48]: Projects Moderation
+      - link "Notifications" [ref=e49] [cursor=pointer]:
+        - /url: /admin/notifications
+        - img [ref=e50]
+        - generic [ref=e53]: Notifications
+    - generic [ref=e54]:
+      - generic [ref=e55]:
+        - generic [ref=e57]: P
+        - generic [ref=e58]:
+          - paragraph [ref=e59]: Platform Admin
+          - paragraph [ref=e60]: admin
+      - button "Sign out" [ref=e61]:
+        - img [ref=e62]
+        - text: Sign out
+  - generic [ref=e65]:
+    - link "Back to Home" [ref=e67] [cursor=pointer]:
+      - /url: /
+      - img [ref=e68]
+      - text: Back to Home
+    - main [ref=e70]:
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - heading "System Administration" [level=1] [ref=e74]
+            - paragraph [ref=e75]: Manage global entities, user access, and platform configurations.
+          - generic [ref=e77]:
+            - img [ref=e78]
+            - text: Admin Access
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - img [ref=e83]
+            - generic [ref=e88]:
+              - paragraph [ref=e89]: "5"
+              - paragraph [ref=e90]: Total Users
+          - generic [ref=e91]:
+            - img [ref=e93]
+            - generic [ref=e95]:
+              - paragraph [ref=e96]: "4"
+              - paragraph [ref=e97]: Total Projects
+          - generic [ref=e98]:
+            - img [ref=e100]
+            - generic [ref=e103]:
+              - paragraph [ref=e104]: "4"
+              - paragraph [ref=e105]: Internships
+          - generic [ref=e106]:
+            - img [ref=e108]
+            - generic [ref=e110]:
+              - paragraph [ref=e111]: "6"
+              - paragraph [ref=e112]: Courses
+        - generic [ref=e114]:
+          - button "Users" [ref=e115]
+          - button "Projects" [active] [ref=e116]
+          - button "Internships" [ref=e117]
+          - button "Courses" [ref=e118]
+          - button "Requests" [ref=e119]
+          - button "Employers" [ref=e120]
+        - generic [ref=e121]:
+          - table [ref=e122]:
+            - rowgroup [ref=e123]:
+              - row "Title Owner Status Visibility Actions" [ref=e124]:
+                - columnheader "Title" [ref=e125]
+                - columnheader "Owner" [ref=e126]
+                - columnheader "Status" [ref=e127]
+                - columnheader "Visibility" [ref=e128]
+                - columnheader "Actions" [ref=e129]
+            - rowgroup [ref=e130]:
+              - row "E-Commerce Platform Ahmed Hassan Completed Public" [ref=e131]:
+                - cell "E-Commerce Platform" [ref=e132]
+                - cell "Ahmed Hassan" [ref=e133]
+                - cell "Completed" [ref=e134]:
+                  - generic [ref=e135]: Completed
+                - cell "Public" [ref=e136]
+                - cell [ref=e137]:
+                  - generic [ref=e138]:
+                    - button "Hide project" [ref=e139]:
+                      - img [ref=e140]
+                    - button "Delete project" [ref=e145]:
+                      - img [ref=e146]
+              - row "AI Study Assistant Ahmed Hassan In Progress Public" [ref=e149]:
+                - cell "AI Study Assistant" [ref=e150]
+                - cell "Ahmed Hassan" [ref=e151]
+                - cell "In Progress" [ref=e152]:
+                  - generic [ref=e153]: In Progress
+                - cell "Public" [ref=e154]
+                - cell [ref=e155]:
+                  - generic [ref=e156]:
+                    - button "Hide project" [ref=e157]:
+                      - img [ref=e158]
+                    - button "Delete project" [ref=e163]:
+                      - img [ref=e164]
+              - row "Database Management System Dr. Khaled Mansour Completed Private" [ref=e167]:
+                - cell "Database Management System" [ref=e168]
+                - cell "Dr. Khaled Mansour" [ref=e169]
+                - cell "Completed" [ref=e170]:
+                  - generic [ref=e171]: Completed
+                - cell "Private" [ref=e172]
+                - cell [ref=e173]:
+                  - generic [ref=e174]:
+                    - button "Hide project" [ref=e175]:
+                      - img [ref=e176]
+                    - button "Delete project" [ref=e181]:
+                      - img [ref=e182]
+              - row "Portfolio Builder Ahmed Hassan In Progress Public" [ref=e185]:
+                - cell "Portfolio Builder" [ref=e186]
+                - cell "Ahmed Hassan" [ref=e187]
+                - cell "In Progress" [ref=e188]:
+                  - generic [ref=e189]: In Progress
+                - cell "Public" [ref=e190]
+                - cell [ref=e191]:
+                  - generic [ref=e192]:
+                    - button "Hide project" [ref=e193]:
+                      - img [ref=e194]
+                    - button "Delete project" [ref=e199]:
+                      - img [ref=e200]
+          - generic [ref=e204]: 4 total projects

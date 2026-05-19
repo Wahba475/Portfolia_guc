@@ -4,11 +4,12 @@ import toast from 'react-hot-toast'
 import { getLayoutForRole } from '../utils/layoutForRole'
 import { Search, Globe, Lock, Plus, X, Trash2, SortAsc } from 'lucide-react'
 
-export default function Projects({ currentUser, onLogout, projects, onCreateProject, onDeleteProject, courses = [], notifications = [], onMarkRead }) {
+export default function Projects({ currentUser, onLogout, projects, onCreateProject, onDeleteProject, courses = [], notifications = [], onMarkRead, userList = [] }) {
   const Layout = getLayoutForRole(currentUser?.role)
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState('Mine')
   const [courseFilter, setCourseFilter] = useState('')
+  const [instructorFilter, setInstructorFilter] = useState('')
   const [sortBy, setSortBy] = useState('date-desc') // 'date-desc' | 'date-asc' | 'rating'
   const [showModal, setShowModal] = useState(false)
 
@@ -21,6 +22,8 @@ export default function Projects({ currentUser, onLogout, projects, onCreateProj
 
   const filterTabs = ['Mine', 'All Public']
 
+  const instructors = useMemo(() => userList.filter(u => u.role === 'instructor'), [userList])
+
   // Filter + sort logic — Req 43, 44, 45
   const filtered = useMemo(() => {
     let list = projects.filter((p) => {
@@ -28,9 +31,10 @@ export default function Projects({ currentUser, onLogout, projects, onCreateProj
         p.title.toLowerCase().includes(query.toLowerCase()) ||
         (p.tags || []).some((t) => t.toLowerCase().includes(query.toLowerCase()))
       const matchCourse = !courseFilter || p.courseId === courseFilter
+      const matchInstructor = !instructorFilter || (p.instructors || []).includes(instructorFilter)
 
-      if (filter === 'Mine') return matchQuery && matchCourse && String(p.ownerId) === String(currentUser.id)
-      return matchQuery && matchCourse && (p.visibility === 'Public' || !p.visibility)
+      if (filter === 'Mine') return matchQuery && matchCourse && matchInstructor && String(p.ownerId) === String(currentUser.id)
+      return matchQuery && matchCourse && matchInstructor && (p.visibility === 'Public' || !p.visibility)
     })
 
     if (sortBy === 'date-asc') list = [...list].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
@@ -38,7 +42,7 @@ export default function Projects({ currentUser, onLogout, projects, onCreateProj
     else if (sortBy === 'rating') list = [...list].sort((a, b) => (b.rating || 0) - (a.rating || 0))
 
     return list
-  }, [projects, query, filter, courseFilter, sortBy, currentUser.id])
+  }, [projects, query, filter, courseFilter, instructorFilter, sortBy, currentUser.id])
 
   function handleCreate(e) {
     e.preventDefault()
@@ -107,6 +111,16 @@ export default function Projects({ currentUser, onLogout, projects, onCreateProj
                 style={{ fontFamily: "'Manrope', sans-serif" }}>
                 <option value="">All Courses</option>
                 {courses.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+              </select>
+            )}
+
+            {/* Filter by Instructor — Req 43 */}
+            {instructors.length > 0 && (
+              <select value={instructorFilter} onChange={e => setInstructorFilter(e.target.value)}
+                className="border border-[#e5e2e1] bg-white px-3 py-2 text-sm text-[#111111] focus:border-[#111111] focus:outline-none"
+                style={{ fontFamily: "'Manrope', sans-serif" }}>
+                <option value="">All Instructors</option>
+                {instructors.map(i => <option key={i.id} value={i.name}>{i.name}</option>)}
               </select>
             )}
 

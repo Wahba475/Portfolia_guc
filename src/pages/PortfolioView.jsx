@@ -12,6 +12,20 @@ export default function PortfolioView({ currentUser, onLogout, notifications, on
   
   const publicProjects = (projects || []).filter((p) => String(p.ownerId) === String(userId) && p.visibility === 'Public')
 
+  // Req 72: language stats and top collaborators
+  const langCounts = {}
+  publicProjects.forEach(p => {
+    ;(p.languages || p.tags || []).forEach(l => { langCounts[l] = (langCounts[l] || 0) + 1 })
+  })
+  const totalLangCount = Object.values(langCounts).reduce((a, b) => a + b, 0)
+  const topLanguages = Object.entries(langCounts).sort((a, b) => b[1] - a[1]).slice(0, 6)
+
+  const collabCounts = {}
+  publicProjects.forEach(p => {
+    ;(p.collaborators || []).forEach(name => { collabCounts[name] = (collabCounts[name] || 0) + 1 })
+  })
+  const topCollaborators = Object.entries(collabCounts).sort((a, b) => b[1] - a[1]).slice(0, 5)
+
   if (!student) {
     return (
       <Layout currentUser={currentUser} onLogout={onLogout} notifications={notifications} onMarkRead={onMarkRead}>
@@ -94,6 +108,55 @@ export default function PortfolioView({ currentUser, onLogout, notifications, on
             )}
           </div>
         </div>
+
+        {/* Req 72: Stats — language breakdown and top collaborators */}
+        {publicProjects.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {topLanguages.length > 0 && (
+              <div className="bg-white border border-[#e5e2e1] p-6">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[#747878] mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  Languages & Technologies
+                </h3>
+                <div className="space-y-2">
+                  {topLanguages.map(([lang, count]) => {
+                    const pct = totalLangCount > 0 ? Math.round((count / totalLangCount) * 100) : 0
+                    return (
+                      <div key={lang}>
+                        <div className="flex justify-between text-xs mb-1" style={{ fontFamily: "'Manrope', sans-serif" }}>
+                          <span className="font-semibold text-[#111111]">{lang}</span>
+                          <span className="text-[#747878]">{pct}%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-[#f1edec]">
+                          <div className="h-1.5 bg-[#111111] transition-all" style={{ width: `${pct}%` }} />
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+            {topCollaborators.length > 0 && (
+              <div className="bg-white border border-[#e5e2e1] p-6">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[#747878] mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  Top Collaborators
+                </h3>
+                <div className="space-y-3">
+                  {topCollaborators.map(([name, count]) => (
+                    <div key={name} className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-[#111111] flex items-center justify-center flex-shrink-0">
+                        <span className="text-white text-xs font-bold">{name.charAt(0)}</span>
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-[#111111]" style={{ fontFamily: "'Manrope', sans-serif" }}>{name}</p>
+                        <p className="text-[10px] text-[#747878]" style={{ fontFamily: "'Inter', sans-serif" }}>{count} project{count !== 1 ? 's' : ''}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Projects section */}
         <div>

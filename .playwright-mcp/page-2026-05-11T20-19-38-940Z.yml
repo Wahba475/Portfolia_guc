@@ -1,0 +1,16 @@
+- main [ref=e4]:
+  - generic [ref=e5]:
+    - button "Back" [ref=e23]:
+      - img [ref=e7]
+      - text: Back
+    - paragraph [ref=e13]: Step 3 of 3 — New Password
+    - heading "Reset Password" [level=1] [ref=e43]
+    - paragraph [ref=e15]: Choose a new password for your account.
+  - generic [ref=e44]:
+    - generic [ref=e45]:
+      - generic [ref=e46]: New Password
+      - textbox "Min. 6 characters" [ref=e47]
+    - generic [ref=e48]:
+      - generic [ref=e49]: Confirm Password
+      - textbox "Re-enter new password" [ref=e50]
+    - button "Reset Password" [ref=e51]

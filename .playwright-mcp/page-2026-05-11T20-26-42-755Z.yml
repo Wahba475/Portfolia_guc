@@ -1,0 +1,84 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "Notifications" [ref=e12]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - link "Dashboard" [ref=e17] [cursor=pointer]:
+        - /url: /instructor/dashboard
+        - img [ref=e18]
+        - generic [ref=e23]: Dashboard
+      - link "Courses" [ref=e24] [cursor=pointer]:
+        - /url: /instructor/courses
+        - img [ref=e25]
+        - generic [ref=e27]: Courses
+      - link "Students / Portfolios" [ref=e28] [cursor=pointer]:
+        - /url: /instructor/portfolios
+        - img [ref=e29]
+        - generic [ref=e34]: Students / Portfolios
+      - link "Internships" [ref=e35] [cursor=pointer]:
+        - /url: /instructor/internships
+        - img [ref=e36]
+        - generic [ref=e39]: Internships
+      - link "Messages" [ref=e40] [cursor=pointer]:
+        - /url: /instructor/messages
+        - img [ref=e41]
+        - generic [ref=e43]: Messages
+      - link "Profile" [ref=e44] [cursor=pointer]:
+        - /url: /instructor/profile
+        - img [ref=e45]
+        - generic [ref=e48]: Profile
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e52]: D
+        - generic [ref=e53]:
+          - paragraph [ref=e54]: Dr. Khaled Mansour
+          - paragraph [ref=e55]: instructor
+      - button "Sign out" [ref=e56]:
+        - img [ref=e57]
+        - text: Sign out
+  - generic [ref=e60]:
+    - link "Back to Home" [ref=e62] [cursor=pointer]:
+      - /url: /
+      - img [ref=e63]
+      - text: Back to Home
+    - main [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - paragraph [ref=e68]: Academics
+          - heading "My Courses" [level=1] [ref=e69]
+          - paragraph [ref=e70]: Manage the courses you are currently teaching.
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: CSEN901 - Bachelor Project
+              - generic [ref=e77]: Not Linked
+            - button "Request Link" [ref=e78]
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - paragraph [ref=e81]: CSEN604 - Database Systems
+              - generic [ref=e82]: Not Linked
+            - button "Request Link" [ref=e83]
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - paragraph [ref=e86]: CSEN503 - Software Engineering
+              - generic [ref=e87]: Not Linked
+            - button "Request Link" [ref=e88]
+          - generic [ref=e89]:
+            - generic [ref=e90]:
+              - paragraph [ref=e91]: CSEN401 - Web Development
+              - generic [ref=e92]: Not Linked
+            - button "Request Link" [ref=e93]
+          - generic [ref=e94]:
+            - generic [ref=e95]:
+              - paragraph [ref=e96]: CSEN301 - Algorithms & Data Structures
+              - generic [ref=e97]: Not Linked
+            - button "Request Link" [ref=e98]
+          - generic [ref=e99]:
+            - generic [ref=e100]:
+              - paragraph [ref=e101]: CSEN602 - Operating Systems
+              - generic [ref=e102]: Not Linked
+            - button "Request Link" [ref=e103]

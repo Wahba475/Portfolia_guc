@@ -267,7 +267,7 @@ export default function App() {
   }
 
   // ── Internships ────────────────────────────────────────
-  function handleApplyInternship(internshipId) {
+  function handleApplyInternship(internshipId, coverLetter) {
     const internship = internshipsList.find((i) => i.id === internshipId)
     if (!internship) return { success: false, error: 'Not found' }
     const applicants = internship.applicants || []
@@ -281,10 +281,10 @@ export default function App() {
           ? {
               ...i,
               applicants: [...(i.applicants || []), currentUser.id],
-              // Add applicant status entry
               applicantStatuses: {
                 ...(i.applicantStatuses || {}),
                 [currentUser.id]: 'pending',
+                ...(coverLetter ? { [`${currentUser.id}_cover`]: coverLetter } : {}),
               },
             }
           : i
@@ -468,6 +468,36 @@ export default function App() {
     setLinkingRequests(prev => prev.filter(r => r.id !== reqId))
   }
 
+  function handleFlagProject(projectId, reason) {
+    setProjectsList(prev => prev.map(p =>
+      p.id === projectId
+        ? { ...p, flagged: true, flagReason: reason, flagStatus: 'pending', appeal: null }
+        : p
+    ))
+    const project = projectsList.find(p => p.id === projectId)
+    if (project) addNotification('4', `Project "${project.title}" was flagged for review.`)
+  }
+
+  function handleAdminResolveFlag(projectId, action) {
+    setProjectsList(prev => prev.map(p => {
+      if (p.id !== projectId) return p
+      if (action === 'hide') {
+        const owner = userList.find(u => u.id === p.ownerId)
+        if (owner) addNotification(owner.id, `Your project "${p.title}" has been hidden after review.`)
+        return { ...p, adminHidden: true, flagged: false, flagStatus: 'accepted' }
+      }
+      // dismiss flag
+      return { ...p, flagged: false, flagStatus: 'dismissed', flagReason: null }
+    }))
+  }
+
+  function handleAppealFlag(projectId, message) {
+    setProjectsList(prev => prev.map(p =>
+      p.id === projectId ? { ...p, appeal: message, flagStatus: 'appealed' } : p
+    ))
+    addNotification('4', `Student appealed flag on project "${projectsList.find(p => p.id === projectId)?.title}".`)
+  }
+
   // ── Current user's notifications ───────────────────────
   const myNotifications = currentUser ? (notifications[currentUser.id] || []) : []
   const defaultPath = currentUser ? getRoleDashboardPath(currentUser.role) : '/login'
@@ -489,8 +519,8 @@ export default function App() {
             <Route path="/profile" element={<Navigate to={`${currentBase}/profile`} replace />} />
 
             <Route path="/student/dashboard" element={currentUser.role === 'student' ? <Dashboard currentUser={currentUser} onLogout={handleLogout} projects={projectsList} internships={internshipsList} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} userList={userList} /> : <Navigate to={defaultPath} replace />} />
-            <Route path="/student/projects" element={currentUser.role === 'student' ? <Projects currentUser={currentUser} onLogout={handleLogout} projects={projectsList} onCreateProject={handleCreateProject} onDeleteProject={handleDeleteProject} courses={coursesList} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} /> : <Navigate to={defaultPath} replace />} />
-            <Route path="/student/projects/:id" element={currentUser.role === 'student' ? <ProjectDetails currentUser={currentUser} onLogout={handleLogout} projects={projectsList} userList={userList} onUpdateProject={handleUpdateProject} onAddNotification={addNotification} courses={coursesList} /> : <Navigate to={defaultPath} replace />} />
+            <Route path="/student/projects" element={currentUser.role === 'student' ? <Projects currentUser={currentUser} onLogout={handleLogout} projects={projectsList} onCreateProject={handleCreateProject} onDeleteProject={handleDeleteProject} courses={coursesList} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} userList={userList} /> : <Navigate to={defaultPath} replace />} />
+            <Route path="/student/projects/:id" element={currentUser.role === 'student' ? <ProjectDetails currentUser={currentUser} onLogout={handleLogout} projects={projectsList} userList={userList} onUpdateProject={handleUpdateProject} onAddNotification={addNotification} courses={coursesList} onFlagProject={handleFlagProject} onAppealFlag={handleAppealFlag} /> : <Navigate to={defaultPath} replace />} />
             <Route path="/student/internships" element={currentUser.role === 'student' ? <Internships currentUser={currentUser} onLogout={handleLogout} internships={internshipsList} userList={userList} onApply={handleApplyInternship} onCreateInternship={handleCreateInternship} onSetApplicantStatus={handleSetApplicantStatus} onUpdateInternship={handleUpdateInternship} onDeleteInternship={handleEmployerDeleteInternship} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} /> : <Navigate to={defaultPath} replace />} />
             <Route path="/student/portfolios" element={currentUser.role === 'student' ? <Portfolios currentUser={currentUser} onLogout={handleLogout} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} onToggleFavorite={handleToggleFavorite} userList={userList} projects={projectsList} /> : <Navigate to={defaultPath} replace />} />
             <Route path="/student/messages" element={currentUser.role === 'student' ? <Messages currentUser={currentUser} onLogout={handleLogout} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} userList={userList} messages={messages} onSendMessage={handleSendMessage} onMarkConversationRead={handleMarkConversationRead} /> : <Navigate to={defaultPath} replace />} />
@@ -512,12 +542,12 @@ export default function App() {
             <Route path="/instructor/profile" element={currentUser.role === 'instructor' ? <Profile currentUser={currentUser} onLogout={handleLogout} onUpdateUser={handleUpdateUser} projects={projectsList} internships={internshipsList} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} onClearNotifications={() => handleClearNotifications(currentUser.id)} courses={coursesList} onRequestCourseLink={handleRequestCourseLink} /> : <Navigate to={defaultPath} replace />} />
             <Route path="/instructor/notifications" element={currentUser.role === 'instructor' ? <Profile currentUser={currentUser} onLogout={handleLogout} onUpdateUser={handleUpdateUser} projects={projectsList} internships={internshipsList} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} onClearNotifications={() => handleClearNotifications(currentUser.id)} courses={coursesList} onRequestCourseLink={handleRequestCourseLink} /> : <Navigate to={defaultPath} replace />} />
 
-            <Route path="/admin/dashboard" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} /> : <Navigate to={defaultPath} replace />} />
-            <Route path="/admin/users" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} /> : <Navigate to={defaultPath} replace />} />
-            <Route path="/admin/employers-approval" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} /> : <Navigate to={defaultPath} replace />} />
-            <Route path="/admin/courses" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} /> : <Navigate to={defaultPath} replace />} />
-            <Route path="/admin/course-requests" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} /> : <Navigate to={defaultPath} replace />} />
-            <Route path="/admin/projects-moderation" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} /> : <Navigate to={defaultPath} replace />} />
+            <Route path="/admin/dashboard" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} onResolveFlag={handleAdminResolveFlag} /> : <Navigate to={defaultPath} replace />} />
+            <Route path="/admin/users" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} onResolveFlag={handleAdminResolveFlag} /> : <Navigate to={defaultPath} replace />} />
+            <Route path="/admin/employers-approval" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} onResolveFlag={handleAdminResolveFlag} /> : <Navigate to={defaultPath} replace />} />
+            <Route path="/admin/courses" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} onResolveFlag={handleAdminResolveFlag} /> : <Navigate to={defaultPath} replace />} />
+            <Route path="/admin/course-requests" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} onResolveFlag={handleAdminResolveFlag} /> : <Navigate to={defaultPath} replace />} />
+            <Route path="/admin/projects-moderation" element={currentUser.role === 'admin' ? <Admin currentUser={currentUser} onLogout={handleLogout} userList={userList} projects={projectsList} internships={internshipsList} onDeleteUser={handleAdminDeleteUser} onUpdateUser={handleAdminUpdateUser} onDeleteProject={handleAdminDeleteProject} onDeleteInternship={handleAdminDeleteInternship} courses={coursesList} onCreateCourse={handleAdminCreateCourse} onUpdateCourse={handleAdminUpdateCourse} onDeleteCourse={handleAdminDeleteCourse} linkingRequests={linkingRequests} onResolveLinkRequest={handleAdminResolveLinkRequest} onUpdateProject={handleUpdateProject} onCreateAdminUser={handleAdminCreateUser} onResolveFlag={handleAdminResolveFlag} /> : <Navigate to={defaultPath} replace />} />
             <Route path="/admin/notifications" element={currentUser.role === 'admin' ? <Profile currentUser={currentUser} onLogout={handleLogout} onUpdateUser={handleUpdateUser} projects={projectsList} internships={internshipsList} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} onClearNotifications={() => handleClearNotifications(currentUser.id)} /> : <Navigate to={defaultPath} replace />} />
 
             <Route path="/portfolio/:userId" element={<PortfolioView currentUser={currentUser} onLogout={handleLogout} notifications={myNotifications} onMarkRead={() => handleMarkNotificationsRead(currentUser.id)} onToggleFavorite={handleToggleFavorite} userList={userList} projects={projectsList} />} />

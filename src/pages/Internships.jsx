@@ -10,6 +10,37 @@ const STATUS_STYLES = {
   rejected:  'bg-[#ba1a1a] text-white border-[#ba1a1a]',
 }
 
+/* ── Req 76: Suggested applicants from employer favorites ── */
+function SuggestedApplicants({ internship, favoritedPortfolios, userList }) {
+  if (!favoritedPortfolios || favoritedPortfolios.length === 0) return null
+  const applicantIds = internship.applicants || []
+  const suggested = favoritedPortfolios
+    .map(id => (userList || []).find(u => String(u.id) === String(id) && u.role === 'student'))
+    .filter(Boolean)
+    .filter(u => !applicantIds.includes(u.id))
+  if (suggested.length === 0) return null
+  return (
+    <div className="mt-3 pt-3 border-t border-[#e5e2e1]">
+      <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b38d4] mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+        Suggested from Your Favorites
+      </p>
+      <div className="space-y-2">
+        {suggested.map(u => (
+          <div key={u.id} className="flex items-center gap-3 p-2 bg-[#f8f6ff] border border-[#ddd6fe]">
+            <div className="w-7 h-7 bg-[#6b38d4] flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-[10px] font-bold">{u.name.charAt(0)}</span>
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-bold text-[#111111] truncate" style={{ fontFamily: "'Manrope', sans-serif" }}>{u.name}</p>
+              <p className="text-[10px] text-[#747878] truncate" style={{ fontFamily: "'Inter', sans-serif" }}>{u.major || 'Student'}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 /* ── Req 88: Employer applicant management panel ── */
 function ApplicantManager({ internship, userList, onSetApplicantStatus }) {
   const [open, setOpen] = useState(false)
@@ -266,24 +297,8 @@ export default function Internships({
   }, [internships, query, typeFilter, companyFilter, durationFilter, sortOrder])
 
   function handleApplyWithCover(internshipId, coverLetter) {
-    const result = onApply(internshipId)
+    const result = onApply(internshipId, coverLetter)
     if (result?.success) {
-      // Store cover letter alongside status
-      if (coverLetter && onSetApplicantStatus) {
-        const internship = internships.find(i => i.id === internshipId)
-        if (internship) {
-          onSetApplicantStatus(internshipId, currentUser.id, 'pending')
-          // Store cover in a special key
-          const updated = {
-            ...internship,
-            applicantStatuses: {
-              ...(internship.applicantStatuses || {}),
-              [`${currentUser.id}_cover`]: coverLetter,
-            },
-          }
-          onUpdateInternship && onUpdateInternship(updated)
-        }
-      }
       setFeedback((prev) => ({ ...prev, [internshipId]: 'applied' }))
       toast.success('Application submitted successfully!')
     } else {
@@ -450,6 +465,7 @@ export default function Internships({
                   </div>
                   {/* Req 88: Applicant status management */}
                   <ApplicantManager internship={i} userList={userList} onSetApplicantStatus={onSetApplicantStatus} />
+                  <SuggestedApplicants internship={i} favoritedPortfolios={currentUser?.favorites?.portfolios} userList={userList} />
                 </div>
               ))}
             </div>

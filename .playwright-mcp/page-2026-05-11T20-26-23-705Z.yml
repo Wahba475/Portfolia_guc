@@ -1,0 +1,107 @@
+- generic [ref=e2]:
+  - generic [ref=e31]:
+    - complementary [ref=e33]:
+      - generic [ref=e34]:
+        - button "Go to home" [ref=e35] [cursor=pointer]:
+          - generic [ref=e37]: P
+          - generic [ref=e38]: Portfolia
+        - button "Notifications" [ref=e40]:
+          - img [ref=e41]
+      - navigation [ref=e44]:
+        - link "Dashboard" [ref=e45] [cursor=pointer]:
+          - /url: /instructor/dashboard
+          - img [ref=e46]
+          - generic [ref=e51]: Dashboard
+        - link "Courses" [ref=e52] [cursor=pointer]:
+          - /url: /instructor/courses
+          - img [ref=e53]
+          - generic [ref=e55]: Courses
+        - link "Students / Portfolios" [ref=e56] [cursor=pointer]:
+          - /url: /instructor/portfolios
+          - img [ref=e57]
+          - generic [ref=e62]: Students / Portfolios
+        - link "Internships" [ref=e63] [cursor=pointer]:
+          - /url: /instructor/internships
+          - img [ref=e64]
+          - generic [ref=e67]: Internships
+        - link "Messages" [ref=e68] [cursor=pointer]:
+          - /url: /instructor/messages
+          - img [ref=e69]
+          - generic [ref=e71]: Messages
+        - link "Profile" [ref=e72] [cursor=pointer]:
+          - /url: /instructor/profile
+          - img [ref=e73]
+          - generic [ref=e76]: Profile
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e80]: D
+          - generic [ref=e81]:
+            - paragraph [ref=e82]: Dr. Khaled Mansour
+            - paragraph [ref=e83]: instructor
+        - button "Sign out" [ref=e84]:
+          - img [ref=e85]
+          - text: Sign out
+    - generic [ref=e88]:
+      - link "Back to Home" [ref=e90] [cursor=pointer]:
+        - /url: /
+        - img [ref=e91]
+        - text: Back to Home
+      - main [ref=e93]:
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - heading "Welcome back, Dr.." [level=1] [ref=e96]
+            - paragraph [ref=e97]: Your professional activity at a glance.
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - generic [ref=e100]:
+                - generic [ref=e101]: Total Students
+                - img [ref=e102]
+              - generic [ref=e107]:
+                - paragraph [ref=e108]: "2"
+                - generic [ref=e109]: Registered on platform
+            - generic [ref=e110]:
+              - generic [ref=e111]:
+                - generic [ref=e112]: Total Internships
+                - img [ref=e113]
+              - generic [ref=e115]:
+                - paragraph [ref=e116]: "4"
+                - generic [ref=e117]: Available to students
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - generic [ref=e120]: Pending Invitations
+                - img [ref=e121]
+              - generic [ref=e124]:
+                - paragraph [ref=e125]: "0"
+                - generic [ref=e126]: All clear
+          - generic [ref=e127]:
+            - heading "Activity Feed" [level=2] [ref=e128]
+            - generic [ref=e129]:
+              - 'link "📁 You created a project: \"Database Management System\" 2025-09-01" [ref=e130] [cursor=pointer]':
+                - /url: /projects/3
+                - generic [ref=e131]: 📁
+                - generic [ref=e132]:
+                  - paragraph [ref=e133]: "You created a project: \"Database Management System\""
+                  - paragraph [ref=e134]: 2025-09-01
+              - 'link "🔔 New opening: Frontend Developer Intern at TechCorp Egypt 2026-04-01" [ref=e135] [cursor=pointer]':
+                - /url: /internships
+                - generic [ref=e136]: 🔔
+                - generic [ref=e137]:
+                  - paragraph [ref=e138]: "New opening: Frontend Developer Intern at TechCorp Egypt"
+                  - paragraph [ref=e139]: 2026-04-01
+              - 'link "🔔 New opening: Backend Engineer Intern at Instabug 2026-04-10" [ref=e140] [cursor=pointer]':
+                - /url: /internships
+                - generic [ref=e141]: 🔔
+                - generic [ref=e142]:
+                  - paragraph [ref=e143]: "New opening: Backend Engineer Intern at Instabug"
+                  - paragraph [ref=e144]: 2026-04-10
+          - generic [ref=e145]:
+            - generic [ref=e146]:
+              - heading "My Projects" [level=2] [ref=e147]
+              - link "View all →" [ref=e148] [cursor=pointer]:
+                - /url: /projects
+            - link "Database Management System A Java-based DBMS implementing B+ trees, page management, and SQL-like querying from scratch. Completed" [ref=e150] [cursor=pointer]:
+              - /url: /projects/3
+              - heading "Database Management System" [level=3] [ref=e151]
+              - paragraph [ref=e152]: A Java-based DBMS implementing B+ trees, page management, and SQL-like querying from scratch.
+              - text: Completed
+  - status [ref=e158]: Welcome back!

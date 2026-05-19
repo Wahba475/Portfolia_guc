@@ -1,0 +1,133 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "Notifications" [ref=e12]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - link "Dashboard" [ref=e17] [cursor=pointer]:
+        - /url: /student/dashboard
+        - img [ref=e18]
+        - generic [ref=e23]: Dashboard
+      - link "Projects" [ref=e24] [cursor=pointer]:
+        - /url: /student/projects
+        - img [ref=e25]
+        - generic [ref=e27]: Projects
+      - link "Internships" [ref=e28] [cursor=pointer]:
+        - /url: /student/internships
+        - img [ref=e29]
+        - generic [ref=e32]: Internships
+      - link "Portfolios" [ref=e33] [cursor=pointer]:
+        - /url: /student/portfolios
+        - img [ref=e34]
+        - generic [ref=e39]: Portfolios
+      - link "Messages" [ref=e40] [cursor=pointer]:
+        - /url: /student/messages
+        - img [ref=e41]
+        - generic [ref=e43]: Messages
+      - link "Profile" [ref=e44] [cursor=pointer]:
+        - /url: /student/profile
+        - img [ref=e45]
+        - generic [ref=e48]: Profile
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e52]: A
+        - generic [ref=e53]:
+          - paragraph [ref=e54]: Ahmed Hassan
+          - paragraph [ref=e55]: student
+      - button "Sign out" [ref=e56]:
+        - img [ref=e57]
+        - text: Sign out
+  - generic [ref=e60]:
+    - link "Back to Home" [ref=e62] [cursor=pointer]:
+      - /url: /
+      - img [ref=e63]
+      - text: Back to Home
+    - main [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - heading "Welcome back, Ahmed." [level=1] [ref=e68]
+          - paragraph [ref=e69]: Your professional activity at a glance.
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - generic [ref=e72]:
+              - generic [ref=e73]: Total Projects
+              - img [ref=e74]
+            - generic [ref=e76]:
+              - paragraph [ref=e77]: "3"
+              - generic [ref=e78]: 2 in progress
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - generic [ref=e81]: Applications Sent
+              - img [ref=e82]
+            - generic [ref=e85]:
+              - paragraph [ref=e86]: "1"
+              - generic [ref=e87]: Under review
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]: Open Positions
+              - img [ref=e91]
+            - generic [ref=e94]:
+              - paragraph [ref=e95]: "4"
+              - generic [ref=e96]: Available now
+        - generic [ref=e97]:
+          - link "+ New Project" [ref=e98] [cursor=pointer]:
+            - /url: /projects
+          - link "Browse Internships" [ref=e99] [cursor=pointer]:
+            - /url: /internships
+        - generic [ref=e100]:
+          - heading "Activity Feed" [level=2] [ref=e101]
+          - generic [ref=e102]:
+            - 'link "📁 You created a project: \"Portfolio Builder\" 2026-03-01" [ref=e103] [cursor=pointer]':
+              - /url: /projects/4
+              - generic [ref=e104]: 📁
+              - generic [ref=e105]:
+                - paragraph [ref=e106]: "You created a project: \"Portfolio Builder\""
+                - paragraph [ref=e107]: 2026-03-01
+            - 'link "📁 You created a project: \"AI Study Assistant\" 2026-01-05" [ref=e108] [cursor=pointer]':
+              - /url: /projects/2
+              - generic [ref=e109]: 📁
+              - generic [ref=e110]:
+                - paragraph [ref=e111]: "You created a project: \"AI Study Assistant\""
+                - paragraph [ref=e112]: 2026-01-05
+            - 'link "📁 You created a project: \"E-Commerce Platform\" 2025-10-12" [ref=e113] [cursor=pointer]':
+              - /url: /projects/1
+              - generic [ref=e114]: 📁
+              - generic [ref=e115]:
+                - paragraph [ref=e116]: "You created a project: \"E-Commerce Platform\""
+                - paragraph [ref=e117]: 2025-10-12
+            - link "📄 You applied to \"Frontend Developer Intern\" at TechCorp Egypt Recently" [ref=e118] [cursor=pointer]:
+              - /url: /internships
+              - generic [ref=e119]: 📄
+              - generic [ref=e120]:
+                - paragraph [ref=e121]: You applied to "Frontend Developer Intern" at TechCorp Egypt
+                - paragraph [ref=e122]: Recently
+            - 'link "🔔 New opening: Backend Engineer Intern at Instabug 2026-04-10" [ref=e123] [cursor=pointer]':
+              - /url: /internships
+              - generic [ref=e124]: 🔔
+              - generic [ref=e125]:
+                - paragraph [ref=e126]: "New opening: Backend Engineer Intern at Instabug"
+                - paragraph [ref=e127]: 2026-04-10
+        - generic [ref=e128]:
+          - generic [ref=e129]:
+            - heading "My Projects" [level=2] [ref=e130]
+            - link "View all →" [ref=e131] [cursor=pointer]:
+              - /url: /projects
+          - generic [ref=e132]:
+            - link "E-Commerce Platform A full-stack e-commerce application built with React and Node.js, featuring product listings, cart management, and Stripe payments. Completed" [ref=e133] [cursor=pointer]:
+              - /url: /projects/1
+              - heading "E-Commerce Platform" [level=3] [ref=e134]
+              - paragraph [ref=e135]: A full-stack e-commerce application built with React and Node.js, featuring product listings, cart management, and Stripe payments.
+              - text: Completed
+            - link "AI Study Assistant A RAG-powered chatbot that helps students understand lecture material using semantic search over uploaded PDFs. In Progress" [ref=e136] [cursor=pointer]:
+              - /url: /projects/2
+              - heading "AI Study Assistant" [level=3] [ref=e137]
+              - paragraph [ref=e138]: A RAG-powered chatbot that helps students understand lecture material using semantic search over uploaded PDFs.
+              - text: In Progress
+            - link "Portfolio Builder A SaaS tool that lets students generate beautiful academic portfolios from structured data, inspired by the Paper design system. In Progress" [ref=e139] [cursor=pointer]:
+              - /url: /projects/4
+              - heading "Portfolio Builder" [level=3] [ref=e140]
+              - paragraph [ref=e141]: A SaaS tool that lets students generate beautiful academic portfolios from structured data, inspired by the Paper design system.
+              - text: In Progress

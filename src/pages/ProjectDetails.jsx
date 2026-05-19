@@ -3,13 +3,23 @@ import { useParams, Link } from 'react-router-dom'
 import { getLayoutForRole } from '../utils/layoutForRole'
 import { GitFork, ExternalLink, ArrowLeft, Plus, Send, Check, X, ChevronUp, ChevronDown } from 'lucide-react'
 
-const TABS = ['Overview', 'Tasks', 'Comments', 'Collaborators', 'Instructors']
+const BASE_TABS = ['Overview', 'Tasks', 'Comments', 'Collaborators', 'Instructors']
+const BACHELOR_COURSE_ID = 'c1'
 
-export default function ProjectDetails({ currentUser, onLogout, projects, userList, onUpdateProject, onAddNotification, courses = [] }) {
+export default function ProjectDetails({ currentUser, onLogout, projects, userList, onUpdateProject, onAddNotification, courses = [], onFlagProject, onAppealFlag }) {
   const Layout = getLayoutForRole(currentUser?.role)
   const { id } = useParams()
   const [tab, setTab] = useState('Overview')
+  const [flagReason, setFlagReason] = useState('')
+  const [showFlagForm, setShowFlagForm] = useState(false)
+  const [appealText, setAppealText] = useState('')
+  const [showAppealForm, setShowAppealForm] = useState(false)
 
+
+  // Thesis draft form (Req 23/24)
+  const [draftTitle, setDraftTitle] = useState('')
+  const [draftUrl, setDraftUrl] = useState('')
+  const [draftMsg, setDraftMsg] = useState('')
 
   // Task form
   const [taskText, setTaskText] = useState('')
@@ -50,6 +60,8 @@ export default function ProjectDetails({ currentUser, onLogout, projects, userLi
   const collaborators = project.collaborators || []
   const isAssignedInstructor = currentUser.role === 'instructor' && (project.instructors || []).includes(currentUser.name)
   const canInteract = isOwner || collaborators.includes(currentUser.name) || isAssignedInstructor
+  const isBachelorProject = project.courseId === BACHELOR_COURSE_ID
+  const TABS = isBachelorProject ? [...BASE_TABS, 'Thesis Drafts'] : BASE_TABS
 
   const tasks = project.tasks || []
   const comments = project.comments || []
@@ -61,6 +73,29 @@ export default function ProjectDetails({ currentUser, onLogout, projects, userLi
   const totalItems = milestones.length + tasks.length
   const completedItems = completedMilestones + completedTasks
   const progress = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0
+
+  // ── Thesis draft actions (Req 23/24) ──────────────────
+  const drafts = project.thesisDrafts || []
+
+  function addDraft(e) {
+    e.preventDefault()
+    if (!draftTitle.trim()) { setDraftMsg('Title is required.'); return }
+    const newDraft = { id: String(Date.now()), title: draftTitle.trim(), url: draftUrl.trim(), isFinal: false, createdAt: new Date().toISOString() }
+    onUpdateProject({ ...project, thesisDrafts: [...drafts, newDraft] })
+    setDraftTitle('')
+    setDraftUrl('')
+    setDraftMsg('Draft uploaded.')
+    setTimeout(() => setDraftMsg(''), 3000)
+  }
+
+  function deleteDraft(draftId) {
+    onUpdateProject({ ...project, thesisDrafts: drafts.filter(d => d.id !== draftId) })
+  }
+
+  function setFinalDraft(draftId) {
+    const updated = drafts.map(d => ({ ...d, isFinal: d.id === draftId }))
+    onUpdateProject({ ...project, thesisDrafts: updated })
+  }
 
   // ── Task actions ──────────────────────────────────────
   function addTask(e) {
@@ -687,6 +722,103 @@ export default function ProjectDetails({ currentUser, onLogout, projects, userLi
                 )}
               </section>
             )}
+            {/* THESIS DRAFTS (Req 23/24) */}
+            {tab === 'Thesis Drafts' && isBachelorProject && (
+              <section className="bg-white border border-[#e5e2e1] p-6 md:p-8 space-y-6">
+                <h2 className="text-2xl font-bold text-[#111111] border-b border-[#e5e2e1] pb-2" style={{ fontFamily: "'Newsreader', serif" }}>
+                  Thesis Drafts
+                </h2>
+
+                {/* Draft list */}
+                {drafts.length === 0 ? (
+                  <p className="text-sm text-[#747878]" style={{ fontFamily: "'Manrope', sans-serif" }}>No thesis drafts uploaded yet.</p>
+                ) : (
+                  <div className="space-y-3">
+                    {drafts.map(d => {
+                      const canSee = isOwner || collaborators.includes(currentUser.name) || isAssignedInstructor || d.isFinal
+                      if (!canSee) return null
+                      return (
+                        <div key={d.id} className={`flex items-start justify-between gap-3 p-4 border ${d.isFinal ? 'border-[#111111] bg-[#f8f8f8]' : 'border-[#e5e2e1]'}`}>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 mb-1 flex-wrap">
+                              <span className="text-sm font-bold text-[#111111]" style={{ fontFamily: "'Manrope', sans-serif" }}>{d.title}</span>
+                              {d.isFinal && (
+                                <span className="text-[9px] font-black uppercase tracking-widest bg-[#111111] text-white px-2 py-0.5" style={{ fontFamily: "'Inter', sans-serif" }}>Final Draft</span>
+                              )}
+                            </div>
+                            {d.url && (
+                              <a href={d.url} target="_blank" rel="noreferrer" className="text-xs text-[#6b38d4] underline underline-offset-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                View Document →
+                              </a>
+                            )}
+                            <p className="text-[10px] text-[#747878] mt-1" style={{ fontFamily: "'Inter', sans-serif" }}>
+                              {new Date(d.createdAt).toLocaleDateString()}
+                            </p>
+                          </div>
+                          {(isOwner || collaborators.includes(currentUser.name)) && (
+                            <div className="flex gap-2 flex-shrink-0">
+                              {!d.isFinal && (
+                                <button
+                                  onClick={() => setFinalDraft(d.id)}
+                                  className="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors"
+                                  style={{ fontFamily: "'Inter', sans-serif" }}
+                                >
+                                  Set Final
+                                </button>
+                              )}
+                              <button
+                                onClick={() => deleteDraft(d.id)}
+                                className="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-[#ba1a1a] text-[#ba1a1a] hover:bg-[#ba1a1a] hover:text-white transition-colors"
+                                style={{ fontFamily: "'Inter', sans-serif" }}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+
+                {/* Upload form (owner/collaborator) */}
+                {(isOwner || collaborators.includes(currentUser.name)) && (
+                  <form onSubmit={addDraft} className="pt-4 border-t border-[#e5e2e1] space-y-3">
+                    <label className="block text-xs font-bold uppercase tracking-widest text-[#111111]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      Upload New Draft
+                    </label>
+                    <input
+                      type="text"
+                      value={draftTitle}
+                      onChange={e => setDraftTitle(e.target.value)}
+                      placeholder="Draft title (e.g. Draft v1)"
+                      className="w-full border-b border-[#c4c7c7] py-2 bg-transparent focus:border-[#111111] focus:outline-none text-sm text-[#111111] placeholder:text-[#c4c7c7] transition-colors"
+                      style={{ fontFamily: "'Manrope', sans-serif" }}
+                    />
+                    <input
+                      type="url"
+                      value={draftUrl}
+                      onChange={e => setDraftUrl(e.target.value)}
+                      placeholder="Link to document (optional)"
+                      className="w-full border-b border-[#c4c7c7] py-2 bg-transparent focus:border-[#111111] focus:outline-none text-sm text-[#111111] placeholder:text-[#c4c7c7] transition-colors"
+                      style={{ fontFamily: "'Manrope', sans-serif" }}
+                    />
+                    <button
+                      type="submit"
+                      className="inline-flex items-center gap-1.5 bg-[#111111] text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-[#333] transition-colors"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
+                      <Plus size={12} /> Upload Draft
+                    </button>
+                    {draftMsg && (
+                      <p className={`text-xs font-semibold ${draftMsg.includes('uploaded') || draftMsg.includes('Draft') ? 'text-green-600' : 'text-red-600'}`} style={{ fontFamily: "'Inter', sans-serif" }}>
+                        {draftMsg}
+                      </p>
+                    )}
+                  </form>
+                )}
+              </section>
+            )}
           </div>
 
           {/* Right column — metadata */}
@@ -760,6 +892,90 @@ export default function ProjectDetails({ currentUser, onLogout, projects, userLi
                   <span>Collaborators</span><span className="font-bold text-[#111111]">{collaborators.length}</span>
                 </div>
               </div>
+
+              {/* Req 59-63: Flag / Appeal */}
+              {project.adminHidden && isOwner && (
+                <div className="border-t border-[#e5e2e1] pt-6">
+                  <p className="text-xs font-semibold text-red-600 mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    This project was hidden by admin.
+                  </p>
+                  {project.appeal ? (
+                    <p className="text-xs text-[#747878]" style={{ fontFamily: "'Inter', sans-serif" }}>Appeal submitted.</p>
+                  ) : (
+                    <>
+                      {showAppealForm ? (
+                        <div className="space-y-2">
+                          <textarea
+                            value={appealText}
+                            onChange={e => setAppealText(e.target.value)}
+                            placeholder="Explain why the flag should be removed…"
+                            className="w-full border border-[#e5e2e1] px-3 py-2 text-xs text-[#111111] focus:border-[#111111] focus:outline-none resize-none"
+                            rows={3}
+                            style={{ fontFamily: "'Manrope', sans-serif" }}
+                          />
+                          <div className="flex gap-2">
+                            <button onClick={() => { onAppealFlag && onAppealFlag(project.id, appealText); setShowAppealForm(false) }}
+                              className="flex-1 bg-[#111111] text-white py-1.5 text-xs font-bold uppercase tracking-wider"
+                              style={{ fontFamily: "'Inter', sans-serif" }}>
+                              Submit Appeal
+                            </button>
+                            <button onClick={() => setShowAppealForm(false)}
+                              className="px-3 py-1.5 border border-[#e5e2e1] text-xs font-bold text-[#747878]"
+                              style={{ fontFamily: "'Inter', sans-serif" }}>
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button onClick={() => setShowAppealForm(true)}
+                          className="w-full py-2 border border-[#111111] text-xs font-bold uppercase tracking-wider text-[#111111] hover:bg-[#f1edec] transition-colors"
+                          style={{ fontFamily: "'Inter', sans-serif" }}>
+                          Appeal Decision
+                        </button>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+
+              {!project.adminHidden && !isOwner && onFlagProject && (
+                <div className="border-t border-[#e5e2e1] pt-6">
+                  {project.flagged ? (
+                    <p className="text-xs text-[#747878]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {project.flagStatus === 'dismissed' ? 'Flag dismissed.' : 'This project has been flagged for review.'}
+                    </p>
+                  ) : showFlagForm ? (
+                    <div className="space-y-2">
+                      <textarea
+                        value={flagReason}
+                        onChange={e => setFlagReason(e.target.value)}
+                        placeholder="Reason for flagging…"
+                        className="w-full border border-[#e5e2e1] px-3 py-2 text-xs text-[#111111] focus:border-[#111111] focus:outline-none resize-none"
+                        rows={3}
+                        style={{ fontFamily: "'Manrope', sans-serif" }}
+                      />
+                      <div className="flex gap-2">
+                        <button onClick={() => { if (flagReason.trim()) { onFlagProject(project.id, flagReason); setShowFlagForm(false); setFlagReason('') } }}
+                          className="flex-1 bg-red-600 text-white py-1.5 text-xs font-bold uppercase tracking-wider hover:bg-red-700"
+                          style={{ fontFamily: "'Inter', sans-serif" }}>
+                          Flag Project
+                        </button>
+                        <button onClick={() => setShowFlagForm(false)}
+                          className="px-3 py-1.5 border border-[#e5e2e1] text-xs font-bold text-[#747878]"
+                          style={{ fontFamily: "'Inter', sans-serif" }}>
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button onClick={() => setShowFlagForm(true)}
+                      className="w-full py-2 border border-red-200 text-xs font-bold uppercase tracking-wider text-red-600 hover:bg-red-50 transition-colors"
+                      style={{ fontFamily: "'Inter', sans-serif" }}>
+                      Flag Project
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

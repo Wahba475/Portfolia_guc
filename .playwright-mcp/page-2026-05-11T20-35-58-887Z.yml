@@ -1,0 +1,136 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "1" [ref=e12]:
+        - img [ref=e13]
+        - generic [ref=e16]: "1"
+    - navigation [ref=e17]:
+      - link "Dashboard" [ref=e18] [cursor=pointer]:
+        - /url: /employer/dashboard
+        - img [ref=e19]
+        - generic [ref=e24]: Dashboard
+      - link "Internships" [ref=e25] [cursor=pointer]:
+        - /url: /employer/internships
+        - img [ref=e26]
+        - generic [ref=e29]: Internships
+      - link "Portfolios" [ref=e30] [cursor=pointer]:
+        - /url: /employer/portfolios
+        - img [ref=e31]
+        - generic [ref=e36]: Portfolios
+      - link "Messages" [ref=e37] [cursor=pointer]:
+        - /url: /employer/messages
+        - img [ref=e38]
+        - generic [ref=e40]: Messages
+      - link "Profile" [ref=e41] [cursor=pointer]:
+        - /url: /employer/profile
+        - img [ref=e42]
+        - generic [ref=e45]: Profile
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e49]: S
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: Sara Nabil
+          - paragraph [ref=e52]: employer
+      - button "Sign out" [ref=e53]:
+        - img [ref=e54]
+        - text: Sign out
+  - generic [ref=e57]:
+    - link "Back to Home" [ref=e59] [cursor=pointer]:
+      - /url: /
+      - img [ref=e60]
+      - text: Back to Home
+    - main [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - paragraph [ref=e66]: Opportunities
+            - heading "Internships" [level=1] [ref=e67]
+            - paragraph [ref=e68]: 4 positions available.
+          - button "Post Internship" [ref=e69]:
+            - img [ref=e70]
+            - text: Post Internship
+        - generic [ref=e71]:
+          - button "Browse All" [ref=e72]
+          - button "My Postings (4)" [active] [ref=e73]
+        - generic [ref=e235]:
+          - generic [ref=e236]:
+            - generic [ref=e237]:
+              - generic [ref=e238]:
+                - heading "Frontend Developer Intern" [level=3] [ref=e239]
+                - paragraph [ref=e240]: TechCorp Egypt · Cairo, Egypt
+              - generic [ref=e241]:
+                - generic [ref=e242]: Hybrid
+                - generic [ref=e243]: Hiring
+            - generic [ref=e244]:
+              - button "Edit" [ref=e245]:
+                - img [ref=e246]
+                - text: Edit
+              - button "Archive" [ref=e249]:
+                - img [ref=e250]
+                - text: Archive
+              - button "Delete" [ref=e253]:
+                - img [ref=e254]
+                - text: Delete
+            - button "Manage Applicants (1)" [ref=e258]:
+              - generic [ref=e259]: Manage Applicants (1)
+              - img [ref=e260]
+          - generic [ref=e262]:
+            - generic [ref=e263]:
+              - generic [ref=e264]:
+                - heading "Backend Engineer Intern" [level=3] [ref=e265]
+                - paragraph [ref=e266]: Instabug · New Cairo, Egypt
+              - generic [ref=e267]:
+                - generic [ref=e268]: On-site
+                - generic [ref=e269]: Hiring
+            - generic [ref=e270]:
+              - button "Edit" [ref=e271]:
+                - img [ref=e272]
+                - text: Edit
+              - button "Archive" [ref=e275]:
+                - img [ref=e276]
+                - text: Archive
+              - button "Delete" [ref=e279]:
+                - img [ref=e280]
+                - text: Delete
+            - paragraph [ref=e283]: No applicants yet.
+          - generic [ref=e284]:
+            - generic [ref=e285]:
+              - generic [ref=e286]:
+                - heading "Embedded Systems Intern" [level=3] [ref=e287]
+                - paragraph [ref=e288]: Valeo · 6th of October, Egypt
+              - generic [ref=e289]:
+                - generic [ref=e290]: On-site
+                - generic [ref=e291]: Hiring
+            - generic [ref=e292]:
+              - button "Edit" [ref=e293]:
+                - img [ref=e294]
+                - text: Edit
+              - button "Archive" [ref=e297]:
+                - img [ref=e298]
+                - text: Archive
+              - button "Delete" [ref=e301]:
+                - img [ref=e302]
+                - text: Delete
+            - paragraph [ref=e305]: No applicants yet.
+          - generic [ref=e306]:
+            - generic [ref=e307]:
+              - generic [ref=e308]:
+                - heading "Data Science Intern" [level=3] [ref=e309]
+                - paragraph [ref=e310]: Breadfast · Remote
+              - generic [ref=e311]:
+                - generic [ref=e312]: Remote
+                - generic [ref=e313]: Hiring
+            - generic [ref=e314]:
+              - button "Edit" [ref=e315]:
+                - img [ref=e316]
+                - text: Edit
+              - button "Archive" [ref=e319]:
+                - img [ref=e320]
+                - text: Archive
+              - button "Delete" [ref=e323]:
+                - img [ref=e324]
+                - text: Delete
+            - paragraph [ref=e327]: No applicants yet.

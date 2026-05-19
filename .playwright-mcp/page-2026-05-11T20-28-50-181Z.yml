@@ -1,0 +1,102 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "1" [ref=e12]:
+        - img [ref=e13]
+        - generic [ref=e16]: "1"
+    - navigation [ref=e17]:
+      - link "Dashboard" [ref=e18] [cursor=pointer]:
+        - /url: /employer/dashboard
+        - img [ref=e19]
+        - generic [ref=e24]: Dashboard
+      - link "Internships" [ref=e25] [cursor=pointer]:
+        - /url: /employer/internships
+        - img [ref=e26]
+        - generic [ref=e29]: Internships
+      - link "Portfolios" [ref=e30] [cursor=pointer]:
+        - /url: /employer/portfolios
+        - img [ref=e31]
+        - generic [ref=e36]: Portfolios
+      - link "Messages" [ref=e37] [cursor=pointer]:
+        - /url: /employer/messages
+        - img [ref=e38]
+        - generic [ref=e40]: Messages
+      - link "Profile" [ref=e41] [cursor=pointer]:
+        - /url: /employer/profile
+        - img [ref=e42]
+        - generic [ref=e45]: Profile
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e49]: S
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: Sara Nabil
+          - paragraph [ref=e52]: employer
+      - button "Sign out" [ref=e53]:
+        - img [ref=e54]
+        - text: Sign out
+  - generic [ref=e57]:
+    - link "Back to Home" [ref=e59] [cursor=pointer]:
+      - /url: /
+      - img [ref=e60]
+      - text: Back to Home
+    - main [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - paragraph [ref=e66]: Account
+            - heading "Profile" [level=1] [ref=e67]
+            - paragraph [ref=e68]: Your personal and professional information.
+          - button "Edit Profile" [ref=e69]:
+            - img [ref=e70]
+            - text: Edit Profile
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]:
+              - generic [ref=e75]:
+                - generic [ref=e77]: SN
+                - button "Change profile photo" [ref=e78] [cursor=pointer]:
+                  - img [ref=e79]
+              - generic [ref=e82] [cursor=pointer]:
+                - button "Choose File" [ref=e83]
+                - img [ref=e84]
+                - paragraph [ref=e87]:
+                  - button "Click to upload" [ref=e88]
+                  - text: or drag & drop
+                - paragraph [ref=e89]: PNG, JPG, GIF, WEBP
+            - generic [ref=e90]:
+              - paragraph [ref=e91]: Sara Nabil
+              - paragraph [ref=e92]: employer
+              - paragraph [ref=e93]: sara@company.com
+            - button "Notifications ON" [ref=e95]:
+              - generic [ref=e96]:
+                - img [ref=e97]
+                - text: Notifications
+              - generic [ref=e100]: "ON"
+          - generic [ref=e101]:
+            - generic [ref=e102]:
+              - button "Information" [ref=e103]
+              - button "Notifications (1)" [ref=e104]
+              - button "Favorites" [ref=e105]
+            - generic [ref=e106]:
+              - heading "Information" [level=2] [ref=e107]
+              - generic [ref=e108]:
+                - generic [ref=e109]: Full Name
+                - generic [ref=e110]: Sara Nabil
+              - generic [ref=e111]:
+                - generic [ref=e112]: Email
+                - generic [ref=e113]: sara@company.com
+              - generic [ref=e114]:
+                - generic [ref=e115]: Role
+                - generic [ref=e116]: employer
+              - generic [ref=e117]:
+                - generic [ref=e118]: Company
+                - generic [ref=e119]: TechCorp Egypt
+              - generic [ref=e120]:
+                - generic [ref=e121]: Position
+                - generic [ref=e122]: HR Manager
+              - generic [ref=e123]:
+                - generic [ref=e124]: Bio
+                - generic [ref=e125]: Connecting top talent with exciting opportunities in tech.

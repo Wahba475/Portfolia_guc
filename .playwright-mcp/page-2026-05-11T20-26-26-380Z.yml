@@ -1,0 +1,107 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "Notifications" [ref=e12]:
+        - img [ref=e13]
+    - navigation [ref=e16]:
+      - link "Dashboard" [ref=e17] [cursor=pointer]:
+        - /url: /instructor/dashboard
+        - img [ref=e18]
+        - generic [ref=e23]: Dashboard
+      - link "Courses" [ref=e24] [cursor=pointer]:
+        - /url: /instructor/courses
+        - img [ref=e25]
+        - generic [ref=e27]: Courses
+      - link "Students / Portfolios" [ref=e28] [cursor=pointer]:
+        - /url: /instructor/portfolios
+        - img [ref=e29]
+        - generic [ref=e34]: Students / Portfolios
+      - link "Internships" [ref=e35] [cursor=pointer]:
+        - /url: /instructor/internships
+        - img [ref=e36]
+        - generic [ref=e39]: Internships
+      - link "Messages" [ref=e40] [cursor=pointer]:
+        - /url: /instructor/messages
+        - img [ref=e41]
+        - generic [ref=e43]: Messages
+      - link "Profile" [ref=e44] [cursor=pointer]:
+        - /url: /instructor/profile
+        - img [ref=e45]
+        - generic [ref=e48]: Profile
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e52]: D
+        - generic [ref=e53]:
+          - paragraph [ref=e54]: Dr. Khaled Mansour
+          - paragraph [ref=e55]: instructor
+      - button "Sign out" [ref=e56]:
+        - img [ref=e57]
+        - text: Sign out
+  - generic [ref=e60]:
+    - link "Back to Home" [ref=e62] [cursor=pointer]:
+      - /url: /
+      - img [ref=e63]
+      - text: Back to Home
+    - main [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - paragraph [ref=e69]: Account
+            - heading "Profile" [level=1] [ref=e70]
+            - paragraph [ref=e71]: Your personal and professional information.
+          - button "Edit Profile" [ref=e72]:
+            - img [ref=e73]
+            - text: Edit Profile
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - generic [ref=e77]:
+              - generic [ref=e78]:
+                - generic [ref=e80]: DK
+                - button "Change profile photo" [ref=e81] [cursor=pointer]:
+                  - img [ref=e82]
+              - generic [ref=e85] [cursor=pointer]:
+                - button "Choose File" [ref=e86]
+                - img [ref=e87]
+                - paragraph [ref=e90]:
+                  - button "Click to upload" [ref=e91]
+                  - text: or drag & drop
+                - paragraph [ref=e92]: PNG, JPG, GIF, WEBP
+            - generic [ref=e93]:
+              - paragraph [ref=e94]: Dr. Khaled Mansour
+              - paragraph [ref=e95]: instructor
+              - paragraph [ref=e96]: khaled@guc.edu.eg
+            - generic [ref=e97]:
+              - paragraph [ref=e98]: Skills
+              - generic [ref=e99]:
+                - generic [ref=e100]: Algorithms
+                - generic [ref=e101]: Software Engineering
+                - generic [ref=e102]: Databases
+            - button "Notifications ON" [ref=e104]:
+              - generic [ref=e105]:
+                - img [ref=e106]
+                - text: Notifications
+              - generic [ref=e109]: "ON"
+          - generic [ref=e110]:
+            - generic [ref=e111]:
+              - button "Information" [ref=e112]
+              - button "Notifications" [ref=e113]
+            - generic [ref=e114]:
+              - heading "Information" [level=2] [ref=e115]
+              - generic [ref=e116]:
+                - generic [ref=e117]: Full Name
+                - generic [ref=e118]: Dr. Khaled Mansour
+              - generic [ref=e119]:
+                - generic [ref=e120]: Email
+                - generic [ref=e121]: khaled@guc.edu.eg
+              - generic [ref=e122]:
+                - generic [ref=e123]: Role
+                - generic [ref=e124]: instructor
+              - generic [ref=e125]:
+                - generic [ref=e126]: Department
+                - generic [ref=e127]: Computer Science
+              - generic [ref=e128]:
+                - generic [ref=e129]: Bio
+                - generic [ref=e130]: Teaching software engineering and algorithms for over 10 years.

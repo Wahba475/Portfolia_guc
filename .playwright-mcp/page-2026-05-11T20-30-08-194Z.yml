@@ -1,0 +1,106 @@
+- generic [ref=e3]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - button "Go to home" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: P
+        - generic [ref=e10]: Portfolia
+      - button "1" [ref=e12]:
+        - img [ref=e13]
+        - generic [ref=e16]: "1"
+    - navigation [ref=e17]:
+      - link "Dashboard" [ref=e18] [cursor=pointer]:
+        - /url: /employer/dashboard
+        - img [ref=e19]
+        - generic [ref=e24]: Dashboard
+      - link "Internships" [ref=e25] [cursor=pointer]:
+        - /url: /employer/internships
+        - img [ref=e26]
+        - generic [ref=e29]: Internships
+      - link "Portfolios" [ref=e30] [cursor=pointer]:
+        - /url: /employer/portfolios
+        - img [ref=e31]
+        - generic [ref=e36]: Portfolios
+      - link "Messages" [ref=e37] [cursor=pointer]:
+        - /url: /employer/messages
+        - img [ref=e38]
+        - generic [ref=e40]: Messages
+      - link "Profile" [ref=e41] [cursor=pointer]:
+        - /url: /employer/profile
+        - img [ref=e42]
+        - generic [ref=e45]: Profile
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e49]: S
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: Sara Nabil
+          - paragraph [ref=e52]: employer
+      - button "Sign out" [ref=e53]:
+        - img [ref=e54]
+        - text: Sign out
+  - generic [ref=e57]:
+    - link "Back to Home" [ref=e59] [cursor=pointer]:
+      - /url: /
+      - img [ref=e60]
+      - text: Back to Home
+    - main [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - paragraph [ref=e65]: Discover
+          - heading "Portfolios" [level=1] [ref=e66]
+          - paragraph [ref=e67]: 2 portfolios found.
+        - generic [ref=e68]:
+          - button "Students (2)" [ref=e69]
+          - button "Instructors (1)" [ref=e70]
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - img [ref=e73]
+            - textbox "Search by name or email…" [ref=e76]
+          - combobox [ref=e77]:
+            - option "All Majors" [selected]
+            - option "Computer Science"
+          - combobox [ref=e78]:
+            - option "All Skills" [selected]
+            - option "Java"
+            - option "Node.js"
+            - option "Python"
+            - option "React"
+          - combobox [ref=e79]:
+            - 'option "Sort: Name" [selected]'
+            - 'option "Sort: Most Projects"'
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - generic [ref=e82]:
+              - generic [ref=e83]:
+                - generic [ref=e85]: A
+                - generic [ref=e86]:
+                  - paragraph [ref=e87]: Ahmed Hassan
+                  - paragraph [ref=e88]: Computer Science
+              - button "Remove from favorites" [active] [ref=e119]:
+                - img [ref=e90]
+            - paragraph [ref=e92]: Passionate about building scalable web applications and exploring AI.
+            - generic [ref=e93]:
+              - generic [ref=e94]: React
+              - generic [ref=e95]: Node.js
+              - generic [ref=e96]: Python
+              - generic [ref=e97]: Java
+            - generic [ref=e98]:
+              - generic [ref=e99]:
+                - img [ref=e100]
+                - text: 3 projects
+              - link "View Portfolio →" [ref=e102] [cursor=pointer]:
+                - /url: /portfolio/1
+          - generic [ref=e103]:
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - generic [ref=e107]: T
+                - generic [ref=e108]:
+                  - paragraph [ref=e109]: Test Student
+                  - paragraph [ref=e110]: Computer Science
+              - button "Add to favorites" [ref=e111]:
+                - img [ref=e112]
+            - generic [ref=e114]:
+              - generic [ref=e115]:
+                - img [ref=e116]
+                - text: 0 projects
+              - link "View Portfolio →" [ref=e118] [cursor=pointer]:
+                - /url: /portfolio/1778530680887
